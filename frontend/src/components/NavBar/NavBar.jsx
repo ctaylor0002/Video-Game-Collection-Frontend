@@ -3,6 +3,7 @@ import useAuth from './../../hooks/useAuth';
 import Logo from '../../assets/Logo.png';
 import './NavBar.css';
 import axios from 'axios';
+import { Link } from "react-router-dom";
 // import ProfilePic from '../../assets/base_profile_picture.jpg'
 
 
@@ -45,8 +46,8 @@ const NavBar = () => {
 
             <div className='navigation-bar-locations'>
                 <ul>
-                    <li>Home</li>
-                    <li>Profile</li>
+                    <Link to='/home'><li>Home</li></Link>
+                    <Link to='/profile'><li>Profile</li></Link>
                     <li>Collection</li>
                 </ul>
                 <div className='navigation-bar-locations-user'>

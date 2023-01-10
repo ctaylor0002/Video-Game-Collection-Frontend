@@ -51,6 +51,8 @@ const HomePage = (props) => {
      }
    }
 
+
+   // Add a way to change the color of the username if the post.user.staff is true
   return (
     <div className="container">
       {posts &&
