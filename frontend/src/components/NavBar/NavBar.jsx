@@ -49,18 +49,11 @@ const NavBar = () => {
                     <li>Profile</li>
                     <li>Collection</li>
                 </ul>
-                <div>
+                <div className='navigation-bar-locations-user'>
                     <img src={ProfilePic} className='navigation-bar-locations-user-profile-picture'/>
                     <h2>Welcome, username</h2>
                 
                 </div>
-                {/* <div > */}
-
-                    
-
-                
-
-                {/* </div> */}
                     
             </div>  
             
