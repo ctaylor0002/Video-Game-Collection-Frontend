@@ -9,6 +9,38 @@ body {
     margin-top: 80px;
 }
 
-.test {
-    color: black;
+.container-post {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border: 3px;
+    border-style: solid;
+    margin-top: 10px;
+    border-radius: 10px;
+    padding: 5px;
+    box-shadow: 1px 4px 6px 2px grey;
+    background-color: #817f7f;
+
+}
+
+.container-post-user {
+    display: flex;
+
+}
+
+.container-post-content {
+    display: flex;
+    margin-top: 10px;
+    flex-wrap: wrap;
+
+}
+
+.container-post-likes-dislikes {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.container-post-likes-count {
+    margin-right: 20px;
 }

@@ -73,6 +73,7 @@ h2 {
 
 .navigation-bar-locations-user {
     display: flex;
+    align-items: center;
 }
 
 /* .navigation-bar-locations-user img {
