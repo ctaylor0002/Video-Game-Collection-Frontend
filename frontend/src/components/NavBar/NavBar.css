@@ -1,35 +1,80 @@
 ul {
-  display: flex;
-  justify-content: space-between;
-  list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
 }
 
 li {
-  font-size: 1.25rem;
+    padding-left: 10px; 
+    font-size: 16px;
+    color: white;
 }
 
-.navBar {
-  background: steelblue;
-  box-shadow: 4px 2px 5px gray;
-  color: white;
-  margin-bottom: 2rem;
-  padding: 1.5rem 2rem;
+h1 {
+    color: white;
 }
 
-.navBar button {
-  background: transparent;
-  border: 2px solid white;
-  color: white;
-  padding: 0.4rem 0.5rem;
+h2 {
+    font-size: 16px;
+    color: white;
 }
 
-.navBar button:hover {
-  background: white;
-  color: steelblue;
-  cursor: pointer;
+.navigation-bar-locations-user-profile-picture {
+    z-index: 1;
+    margin-right: 10px;
+    margin-left: 20px;
+    width: 40px; 
+    height: 40px;
 }
 
-.brand {
-  cursor: pointer;
-  font-size: 2rem;
+.navigation-bar-logo-image {
+    padding-left: 1rem;
+    height: 40px;
 }
+
+.navigation-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 80px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(70, 70, 70) ;
+    align-items: center;
+}
+
+.navigation-bar div {
+    width: 33%;
+}
+
+.navigation-bar-logo {
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.navigation-bar-title {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.navigation-bar-locations {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.navigation-bar-locations-user {
+    display: flex;
+}
+
+/* .navigation-bar-locations-user img {
+    padding-left: 3rem;
+    padding-right: 1rem;
+    width: 40px;
+    height: 40px;
+} */
