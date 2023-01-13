@@ -48,11 +48,11 @@ const NavBar = () => {
                 <ul>
                     <Link to='/home'><li>Home</li></Link>
                     <Link to='/profile'><li>Profile</li></Link>
-                    <li>Collection</li>
+                    <Link to='/collection'><li>Collection</li></Link>
                 </ul>
                 <div className='navigation-bar-locations-user'>
                     <img src={ProfilePic} className='navigation-bar-locations-user-profile-picture'/>
-                    <h2>Welcome, username</h2>
+                    <h2>Welcome, {user.username}</h2>
                 
                 </div>
                     

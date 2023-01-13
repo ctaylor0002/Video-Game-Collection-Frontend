@@ -8,9 +8,11 @@ li {
     padding-left: 10px; 
     font-size: 16px;
     color: white;
-    text-decoration: none;
 }
 
+a {
+    text-decoration: none;
+}
 
 /* Add a transition of 1 second back after not hovering */
 li:hover {

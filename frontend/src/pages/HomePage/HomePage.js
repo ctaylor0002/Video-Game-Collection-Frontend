@@ -4,6 +4,7 @@ import useAuth from "../../hooks/useAuth";
 
 import axios from "axios";
 import "../HomePage/HomePage.css"
+import LikeButton from "../../components/Buttons/LikeButton/LikeButton";
 
 const HomePage = (props) => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
@@ -68,6 +69,7 @@ const HomePage = (props) => {
             <div className="container-post-likes-dislikes">
               <div className="container-post-likes-count">
                 <p key={post.id}>Likes: {post.likes}</p>
+                <LikeButton />
               </div>
               <div className="container-post-dislikes-count">
                 <p key={post.id}>Dislikes: {post.dislikes}</p>
