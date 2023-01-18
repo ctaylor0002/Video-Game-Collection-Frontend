@@ -3,6 +3,7 @@ import useAuth from '../../hooks/useAuth';
 import LikeButton from "../../components/Buttons/LikeButton/LikeButton";
 import axios from 'axios';
 import '../ProfilePage/ProfilePage.css'
+import DislikeButton from '../../components/Buttons/DislikeButton/DislikeButton';
 
 const ProfilePage = (props) => {
    
@@ -79,6 +80,7 @@ const ProfilePage = (props) => {
                                     </div>
                                     <div className="container-post-dislikes-count">
                                         <p key={post.id}>Dislikes: {post.dislikes}</p>
+                                        <DislikeButton />
                                     </div>
                                 </div>
                             </div>
