@@ -15,14 +15,14 @@ const DislikeButton = (props) => {
         if (dislikeValue === 0) {
             setDislikeValue(1);
             setDislikeImage(DislikedButtonImg);
-            props.dislikeSong(props.id, 1);
-            // props.getAllSongs();
+            props.dislikePost(props.id, 1);
+
 
         }  else if (dislikeValue == 1) {
             setDislikeValue(0);
             setDislikeImage(DislikeButtonImg);
-            props.dislikeSong(props.id, -1);
-            // props.getAllSongs();
+            props.dislikePost(props.id, -1);
+
         }
     }
 

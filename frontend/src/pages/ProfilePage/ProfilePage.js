@@ -10,90 +10,49 @@ const ProfilePage = (props) => {
     const [user, token] = useAuth();
     const [posts, setPosts] = useState([]);
     const [followers, setFollowers] = useState([]);
-    const [followersPosts, setFollowersPosts] = useState([]);
-
-   
+  
     // Here I think I will show there picture with an option to change it
     // Plus I think I will have a followers tab
     // Plus I think I will have a following tab
    
     useEffect(() => {
-        //fetchFollowers();
         fetchNewPosts();
-        //getFollowersPosts();
       }, [])
 
     const fetchNewPosts = async () => {
         try {
-          let postsResponse = await axios.get(`http://127.0.0.1:8000/api/posts/${user.id}/`)
+          let postsResponse = await axios.get(`http://127.0.0.1:8000/api/posts/${user.id}/`);
+
           let tempPostsResponse = postsResponse.data;
+
           let followersResponse = await axios.get(`http://127.0.0.1:8000/api/followers/`, {
             headers: {
                 Authorization : "Bearer " + token,
             },
         });
+
+          setFollowers(followersResponse.data);
+
           let tempFollowersResponse = followersResponse.data;
+
           let testPosts = [];
 
           for(let i = 0; i < tempFollowersResponse.length; i++) {
 
             let tempFollowersPosts = tempPostsResponse.filter(function(el) {
 
-                return el.user.id == tempFollowersResponse[i].follower_user
-            })   
-            testPosts = testPosts.concat(tempFollowersPosts)
+                return el.user.id === tempFollowersResponse[i].follower_user
+            });   
+            testPosts = testPosts.concat(tempFollowersPosts);
         
         }
-        console.log(testPosts)
-        
-        setPosts(testPosts)
+  
+        setPosts(testPosts);
        
         } catch (error) {
          console.log(error.response.data);
         }
       }
-
-    // const fetchFollowers = async () => {
-    //     try{
-    //         let response = await axios.get(`http://127.0.0.1:8000/api/followers/`, {
-    //             headers: {
-    //                 Authorization : "Bearer " + token,
-    //             },
-    //         });
-    //         console.log(response.data);
-    //         setFollowers(response.data);
-    //     } catch (error) {
-    //         console.log(error.response.data);
-    //     }
-    // }
-
-    // const getFollowersPosts = async () => {
-    //     let testPosts = [];
-    //     for(let i = 0; i < followers.length; i++) {
-    //         let tempFollowersPosts = posts.filter(post => post.user.id === followers[i]);
-    //         testPosts = [testPosts, tempFollowersPosts];
-    //         console.log(followersPosts)
-    //     }
-    //     console.log(testPosts);
-       
-        // try {
-        //     for(let i = 0; i < followers.length; i++) {
-        //         let tempFollowersPosts = posts.filter(post => post.user.id === followers[i]);
-        //         setFollowersPosts([...followersPosts, tempFollowersPosts]);
-        //         console.log(followersPosts)
-        //     } 
-        // } catch (error) {
-        //     console.log(error.response.data)
-        // }
-        
-       
-        
-        // let tempFollowersPosts = posts.filter(post => post.user.id === user.id);
-        // console.log(tempFollowersPosts);
-        // setFollowersPosts(tempFollowersPosts);
-    //}
-
-
    
     return ( 
         <div className='profile-container'>
@@ -114,11 +73,11 @@ const ProfilePage = (props) => {
                                 <div className="container-post-likes-dislikes">
                                     <div className="container-post-likes-count">
                                         <p key={post.id}>Likes: {post.likes}</p>
-                                        <LikeButton />
+                                        <LikeButton id={post.id} likePost={props.likePost} />
                                     </div>
                                     <div className="container-post-dislikes-count">
                                         <p key={post.id}>Dislikes: {post.dislikes}</p>
-                                        <DislikeButton />
+                                        <DislikeButton id={post.id} dislikePost={props.dislikePost}/>
                                     </div>
                                 </div>
                             </div>
