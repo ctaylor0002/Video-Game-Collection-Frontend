@@ -5,6 +5,7 @@ import axios from 'axios';
 import '../ProfilePage/ProfilePage.css'
 import DislikeButton from '../../components/Buttons/DislikeButton/DislikeButton';
 
+
 const ProfilePage = (props) => {
    
     const [user, token] = useAuth();
@@ -19,6 +20,8 @@ const ProfilePage = (props) => {
         fetchNewPosts();
       }, [])
 
+
+      //I should probably make the posts there own component so all of them dont need to be rerendered for one change
     const fetchNewPosts = async () => {
         try {
           let postsResponse = await axios.get(`http://127.0.0.1:8000/api/posts/${user.id}/`);
@@ -48,15 +51,33 @@ const ProfilePage = (props) => {
         }
   
         setPosts(testPosts);
-       
+        
         } catch (error) {
          console.log(error.response.data);
         }
       }
+
+
+        // const likePost = async () => {
+        //     try {
+        //         let likePostResponse = await axios.patch()
+        //     } catch (error) {
+                
+        //     }
+        // }
+
+        // const dislikePost = async () => {
+        //     try {
+                
+        //     } catch (error) {
+                
+        //     }
+        // }
    
     return ( 
         <div className='profile-container'>
             <div className='followers-posts'>
+                <h3 className='followers-posts-header'>Followered Users Posts</h3>
                 {posts &&
                 posts.map((post) => {
                     return (
@@ -86,7 +107,7 @@ const ProfilePage = (props) => {
                 })}
 
             </div>
-            <div className='profile-contatiner'>
+            <div className='profile-contatiner-posts'>
                 <div className='profile-contatiner-create-post'>
                     <form>
                         <h3>Make a Post</h3>
@@ -98,6 +119,12 @@ const ProfilePage = (props) => {
             
                 </div>
             </div>
+
+            <div className='profile-container-followers-followed'>
+                <button>Followers</button>
+                <button>Following</button>
+            </div>
+
        </div>
     );
 

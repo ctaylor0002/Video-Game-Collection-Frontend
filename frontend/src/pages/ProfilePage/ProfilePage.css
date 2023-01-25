@@ -18,3 +18,8 @@ body {
 .container-post-dislikes-count {
     display: flex;
 }
+
+.followers-posts-header {
+    display: flex;
+    justify-content: center;
+}
