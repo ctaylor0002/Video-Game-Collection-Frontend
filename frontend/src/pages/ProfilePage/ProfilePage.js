@@ -4,13 +4,16 @@ import LikeButton from "../../components/Buttons/LikeButton/LikeButton";
 import axios from 'axios';
 import '../ProfilePage/ProfilePage.css'
 import DislikeButton from '../../components/Buttons/DislikeButton/DislikeButton';
+import UsersTable from '../../components/UsersTable/UsersTable';
 
 
 const ProfilePage = (props) => {
    
     const [user, token] = useAuth();
     const [posts, setPosts] = useState([]);
+    const [myPosts, setMyPosts] = useState([]);
     const [followers, setFollowers] = useState([]);
+    const [following, setFollowing] = useState([]);
   
     // Here I think I will show there picture with an option to change it
     // Plus I think I will have a followers tab
@@ -18,6 +21,7 @@ const ProfilePage = (props) => {
    
     useEffect(() => {
         fetchNewPosts();
+        fetchFollowers();
       }, [])
 
 
@@ -27,26 +31,28 @@ const ProfilePage = (props) => {
           let postsResponse = await axios.get(`http://127.0.0.1:8000/api/posts/${user.id}/`);
 
           let tempPostsResponse = postsResponse.data;
+          console.log(tempPostsResponse)
 
-          let followersResponse = await axios.get(`http://127.0.0.1:8000/api/followers/`, {
+          let followingResponse = await axios.get(`http://127.0.0.1:8000/api/followers/`, {
             headers: {
                 Authorization : "Bearer " + token,
             },
         });
 
-          setFollowers(followersResponse.data);
+          setFollowing(followingResponse.data);
 
-          let tempFollowersResponse = followersResponse.data;
-
+          let tempFollowingResponse = followingResponse.data;
+   
           let testPosts = [];
 
-          for(let i = 0; i < tempFollowersResponse.length; i++) {
+          for(let i = 0; i < tempFollowingResponse.length; i++) {
 
-            let tempFollowersPosts = tempPostsResponse.filter(function(el) {
+            let tempFollowingPosts = tempPostsResponse.filter(function(el) {
 
-                return el.user.id === tempFollowersResponse[i].follower_user
+                return el.user.id === tempFollowingResponse[i].follower_user.id
             });   
-            testPosts = testPosts.concat(tempFollowersPosts);
+            testPosts = testPosts.concat(tempFollowingPosts);
+            // console.log(testPosts)
         
         }
   
@@ -54,6 +60,20 @@ const ProfilePage = (props) => {
         
         } catch (error) {
          console.log(error.response.data);
+        }
+      }
+
+      const fetchFollowers = async () => {
+        try {
+            let followersResponse = await axios.get('http://127.0.0.1:8000/api/followers/list/', {
+                headers: {
+                    Authorization : "Bearer " + token,
+                },
+            });
+            console.log(followersResponse.data);
+            setFollowers(followersResponse);
+        } catch (error) {
+            console.log(error.response.data);
         }
       }
 
@@ -121,8 +141,7 @@ const ProfilePage = (props) => {
             </div>
 
             <div className='profile-container-followers-followed'>
-                <button>Followers</button>
-                <button>Following</button>
+                <UsersTable />
             </div>
 
        </div>
