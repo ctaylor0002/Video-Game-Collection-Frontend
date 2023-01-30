@@ -24,6 +24,7 @@ const ProfilePage = (props) => {
     useEffect(() => {
 
         getRecentPosts();
+        getUserPosts();
 
         // fetchNewPosts();
         // fetchFollowers();
@@ -35,6 +36,11 @@ const ProfilePage = (props) => {
                 let postsResponse = await axios.get(`http://127.0.0.1:8000/api/posts/${user.id}/`);
 
                 let tempPostsResponse = postsResponse.data;
+
+                tempPostsResponse = tempPostsResponse.filter(function(el) {
+            
+                    return el.user.id != user.id
+                });
                 //tempPostsResponse.slice(0,19); // Limits to 20 posts (I may move this to the backend)
                 setPosts(tempPostsResponse);
             } catch (error) {
@@ -127,12 +133,9 @@ const ProfilePage = (props) => {
    
     return ( 
         <div className='profile-container'>
-            <div className='followers-posts'>
-                <FollowingPosts  posts={posts} likeOrDislikePost={likeOrDislikePost} />
-            </div>
-            <div>
-                //<MyPosts userPosts={userPosts} />
-            </div>
+            <FollowingPosts  posts={posts} likeOrDislikePost={likeOrDislikePost} />
+            <MyPosts userPosts={userPosts} deletPost={deletePost} />
+
             {/* <div className='profile-contatiner-posts'>
                 <div className='profile-contatiner-create-post'>
                     <form>

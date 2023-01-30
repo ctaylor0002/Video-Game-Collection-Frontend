@@ -5,11 +5,8 @@ import axios from 'axios';
 
 const FollowingPosts = (props) => {
 
-    const [following, setFollowing] = useState([]);
-
-
     return ( 
-        <div>
+        <div className='follower-posts'>
             <h3 className='followers-posts-header'>Followered Users Posts</h3>
                 {props.posts &&
                 props.posts.map((post) => {
