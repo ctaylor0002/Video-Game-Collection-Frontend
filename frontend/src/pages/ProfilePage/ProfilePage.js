@@ -43,7 +43,7 @@ const ProfilePage = (props) => {
         }
 
         async function deletePost(id) {
-            let testResponse = await axios.delete(`http://127.0.0.1:8000/api/posts/delete/${id}`);
+            let response = await axios.delete(`http://127.0.0.1:8000/api/posts/delete/${id}`);
             getRecentPosts();
         }
 
@@ -104,80 +104,18 @@ const ProfilePage = (props) => {
             console.log(posts)
         }
 
-
-
-
-      //I should probably make the posts there own component so all of them dont need to be rerendered for one change
-    // async function fetchNewPosts() {
-    //     try {
-    //       let postsResponse = await axios.get(`http://127.0.0.1:8000/api/posts/${user.id}/`);
-
-    //       let tempPostsResponse = postsResponse.data;
-    //       console.log(tempPostsResponse)
-
-    //       let followingResponse = await axios.get(`http://127.0.0.1:8000/api/followers/`, {
-    //         headers: {
-    //             Authorization : "Bearer " + token,
-    //         },
-    //     });
-
-    //       setFollowing(followingResponse.data);
-
-    //       let tempFollowingResponse = followingResponse.data;
-   
-    //       let testPosts = [];
-
-    //       for(let i = 0; i < tempFollowingResponse.length; i++) {
-
-    //         let tempFollowingPosts = tempPostsResponse.filter(function(el) {
-
-    //             return el.user.id === tempFollowingResponse[i].follower_user.id
-    //         });   
-    //         testPosts = testPosts.concat(tempFollowingPosts);
-    //         // console.log(testPosts)
-        
-    //     }
-  
-    //     setPosts(testPosts);
-    //     console.log(posts)
-
-    //     // Getting My Posts
-    //     let tempMyPosts = tempPostsResponse.filter(function(el) {
-            
-    //         return el.user.id === user.id
-    //     });
-    //     setMyPosts(tempMyPosts);
-    //     console.log(tempMyPosts)
-
-    //     } catch (error) {
-    //      console.log(error.response.data);
-    //     }
-    //   }
-
-    //   const fetchFollowers = async () => {
-    //     try {
-    //         let followersResponse = await axios.get('http://127.0.0.1:8000/api/followers/list/', {
-    //             headers: {
-    //                 Authorization : "Bearer " + token,
-    //             },
-    //         });
-    //         console.log(followersResponse.data);
-    //         setFollowers(followersResponse);
-    //     } catch (error) {
-    //         console.log(error.response.data);
-    //     }
-    //   }
-
-    
-
-
-        // const likePost = async () => {
-        //     try {
-        //         let likePostResponse = await axios.patch()
-        //     } catch (error) {
-                
-        //     }
-        // }
+        async function likeOrDislikePost(id, type, data) {
+            try {
+                let followingResponse = await axios.patch(`http://127.0.0.1:8000/api/posts/type/${id}?type=${type}&value=${data}`, { type : data}, {
+                    headers: {
+                        Authorization : "Bearer " + token,
+                    },
+                });
+                getRecentPosts();
+            } catch (error) {
+                console.log(error.response.data);
+            }
+        }
 
         // const dislikePost = async () => {
         //     try {
@@ -190,7 +128,7 @@ const ProfilePage = (props) => {
     return ( 
         <div className='profile-container'>
             <div className='followers-posts'>
-                <FollowingPosts getRecentPosts={getRecentPosts}  posts={posts} getFollowing={getFollowing} getFollowingPosts={getFollowingPosts}/>
+                <FollowingPosts  posts={posts} likeOrDislikePost={likeOrDislikePost} />
             </div>
             <div>
                 //<MyPosts userPosts={userPosts} />

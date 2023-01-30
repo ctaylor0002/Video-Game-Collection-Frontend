@@ -11,18 +11,28 @@ const LikeButton = (props) => {
    
 
     function likeButtonCall() {
-        console.log(props)
-        if (likeValue === 0) {
-            setLikeValue(1);
-            setLikeImage(LikedButtonImg);
-            props.likeSong(props.id, 1);
-            // props.getAllSongs();
+        console.log(likeValue)
+        if (likeValue == 0) {
+            try {
+                setLikeValue(1);
+                setLikeImage(LikedButtonImg);
+                props.likeOrDislikePost(props.id, 'like', 1);
+                // props.getAllSongs();
+                
+            } catch (error) {
+                console.log(error.response.data)
+            }
 
         }  else if (likeValue == 1) {
-            setLikeValue(0);
-            setLikeImage(LikeButtonImg);
-            props.likeSong(props.id, -1);
-            // props.getAllSongs();
+            try {
+                setLikeValue(0);
+                setLikeImage(LikeButtonImg);
+                props.likeOrDislikePost(props.id, 'like', -1);
+                // props.getAllSongs();
+                
+            } catch (error) {
+                console.log(error.response.data)
+            }
         }
     }
 
