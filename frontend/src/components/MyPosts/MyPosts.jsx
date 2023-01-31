@@ -10,7 +10,7 @@ const MyPosts = (props) => {
                 <div className='profile-contatiner-create-post'>
                     <form>
                         <h3>Make a Post</h3>
-                        <input type='text' placeholder='What game do you plan to talk about!'></input>
+                        <textarea rows={'5'} columns={'50'} className='post-input-box' type='text' placeholder='What game do you plan to talk about!'></textarea>
                         <button type='submit'>Post</button>
                     </form>
                     <h3>My Posts</h3>
@@ -37,7 +37,6 @@ const MyPosts = (props) => {
                                 </div>
                                 )
                                 })}
-                        
                     </div>
                         
                 </div>
