@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 
 const MyPosts = (props) => {
-
+    console.log(props)
 
     
     return ( 

@@ -82,12 +82,13 @@ const ProfilePage = (props) => {
         }
 
         async function getUserPosts() {
-            let tempMyPosts = posts.filter(function(el) {
+            let tempMyPosts = await axios.get(`http://127.0.0.1:8000/api/posts/${user.id}/`);
+            tempMyPosts = tempMyPosts.data.filter(function(el) {
             
                 return el.user.id === user.id
             });
             setUserPosts(tempMyPosts);
-            console.log(tempMyPosts)
+            
         }
 
         async function getFollowingPosts() {
@@ -128,7 +129,7 @@ const ProfilePage = (props) => {
     return ( 
         <div className='profile-container'>
             <FollowingPosts  posts={posts} likeOrDislikePost={likeOrDislikePost} />
-            <MyPosts userPosts={userPosts} deletPost={deletePost} />
+            <MyPosts userPosts={userPosts} deletePost={deletePost} />
             <UserTable followers={followers} following={following} />
 
             {/* <div className='profile-contatiner-posts'>
