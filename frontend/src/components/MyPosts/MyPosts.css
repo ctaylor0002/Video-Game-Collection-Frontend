@@ -1,0 +1,22 @@
+.delete-button-tag {
+    font-size: 24px;
+    color: red;
+    margin-left: 50px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.delete-button-tag:hover {
+    background-color: transparent;
+}
+
+.container-post-user {
+    display: flex;
+    align-items: center;
+}
+
+.container-post-like-dislike {
+    display: flex;
+    justify-content: space-around;
+}

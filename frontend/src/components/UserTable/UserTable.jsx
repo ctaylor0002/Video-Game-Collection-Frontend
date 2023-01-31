@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
-
+import "./UserTable.css"
 
 const UserTable = (props) => {
 
     const [buttonCheck, setButtonCheck] = useState(0);
-    const [displayImg, setDisplayImg] = useState(props.profilePic)
+    const [displayImg, setDisplayImg] = useState("");
 
+    useEffect(() => {
+        setDisplayImg(props.profilePic)
+    },[props.profilePic])
 
     function displayData() {
+        console.log(props)
         if (buttonCheck === 0) {
             return (
                 <div>
@@ -44,9 +48,20 @@ const UserTable = (props) => {
             return (
                 <div>
                     <form>
-                        <h3>{props.profile.user.username}</h3>
-                        <img src={(displayImg)} />
-                        <input id='image' type={'file'} accept="image/*" onChange={(event) => updateImg(event)}></input>
+                        <div>
+                            <h3>{props.profile.user.username}</h3>
+                        </div>
+                        <div>
+                            <img src={(displayImg)} />
+                            <input id='image' type={'file'} accept="image/*" onChange={(event) => updateImg(event)}></input>
+                        </div>
+                        <div>
+                            <h3>Profile Description</h3>
+                            <textarea rows={"5"} columns={"50"} placeholder="Updated profile description..." className='profile-description-text-box'/>
+                        </div>
+                   
+                   
+                   
                     </form>
                 </div>
             )

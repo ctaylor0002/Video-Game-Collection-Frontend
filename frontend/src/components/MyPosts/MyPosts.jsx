@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import './MyPosts.css'
 
 const MyPosts = (props) => {
     console.log(props)
@@ -24,13 +24,14 @@ const MyPosts = (props) => {
                                         {console.log(post)}
                                         <div className="container-post-user">
                                             <h3 key={post.id}>{post.user.username}</h3>
+                                            <button className='delete-button-tag' value={post.id} onClick={(event) => props.deletePost(event.target.value)}>X</button> 
                                         </div>
                                         <div className="container-post-content">
                                             <p key={post.id}>{post.post_content}</p>
                                         </div>
-                                        <div className='delete-button'>
-                                            <button className='delete-button-tag' value={post.id} onClick={(event) => props.deletePost(event.target.value)}>Delete</button> 
-
+                                        <div className='container-post-like-dislike'>
+                                            <p key={post.id}>Likes: {post.likes}</p>
+                                            <p key={post.id}>Dislikes: {post.dislikes}</p>
                                         </div>
                                     </div>
                                 </div>
