@@ -17,7 +17,6 @@ const LikeButton = (props) => {
                 setLikeValue(1);
                 setLikeImage(LikedButtonImg);
                 props.likeOrDislikePost(props.id, 'like', 1);
-                // props.getAllSongs();
                 
             } catch (error) {
                 console.log(error.response.data)
@@ -28,7 +27,6 @@ const LikeButton = (props) => {
                 setLikeValue(0);
                 setLikeImage(LikeButtonImg);
                 props.likeOrDislikePost(props.id, 'like', -1);
-                // props.getAllSongs();
                 
             } catch (error) {
                 console.log(error.response.data)

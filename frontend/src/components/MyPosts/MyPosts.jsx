@@ -29,7 +29,7 @@ const MyPosts = (props) => {
                                             <p key={post.id}>{post.post_content}</p>
                                         </div>
                                         <div className='delete-button'>
-                                            <a className='delete-button-tag' key={post.id} onClick={(event) => props.deletePost(event.target.key)}>Delete</a>
+                                            <button className='delete-button-tag' value={post.id} onClick={(event) => props.deletePost(event.target.value)}>Delete</button> 
 
                                         </div>
                                     </div>

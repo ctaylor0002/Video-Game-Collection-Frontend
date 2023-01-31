@@ -20,9 +20,6 @@ const UserTable = (props) => {
                                     <td>{follower.main_user.username}</td>
                                 </tr>
                         
-                            // <div>
-                            //     <p>{follower.main_user.username}</p><p>{follower.follower_user.username}</p>
-                            // </div>
                             )
                         })}
                 </div>
@@ -39,9 +36,6 @@ const UserTable = (props) => {
                                 <td>{following.follower_user.username}</td>
                             </tr>
                     
-                        // <div>
-                        //     <p>{follower.main_user.username}</p><p>{follower.follower_user.username}</p>
-                        // </div>
                         )
                     })}
             </div>
@@ -65,7 +59,7 @@ const UserTable = (props) => {
                 
             <div className='users-table'>
                 <div className='users-table-header'>
-                    <button classname={buttonCheck == 0 } value={0} onClick={(event) => setButtonState(event.target.value)}>Followers</button>
+                    <button value={0} onClick={(event) => setButtonState(event.target.value)}>Followers</button>
                     <button value={1} onClick={(event) => setButtonState(event.target.value)}>Following</button>
                 </div>
                 <div>

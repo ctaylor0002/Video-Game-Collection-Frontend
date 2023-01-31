@@ -49,8 +49,9 @@ const ProfilePage = (props) => {
         }
 
         async function deletePost(id) {
+            console.log(id)
             let response = await axios.delete(`http://127.0.0.1:8000/api/posts/delete/${id}`);
-            getRecentPosts();
+            getUserPosts();
         }
 
         async function getFollowers() {

@@ -16,7 +16,6 @@ const DislikeButton = (props) => {
                 setDislikeValue(1);
                 setDislikeImage(DislikedButtonImg);
                 props.likeOrDislikePost(props.id, 'dislike', 1);
-                // props.getAllSongs();
                 
             } catch (error) {
                 console.log(error.response.data)
@@ -27,7 +26,6 @@ const DislikeButton = (props) => {
                 setDislikeValue(0);
                 setDislikeImage(DislikeButtonImg);
                 props.likeOrDislikePost(props.id, 'dislike', -1);
-                // props.getAllSongs();
                 
             } catch (error) {
                 console.log(error.response.data)
