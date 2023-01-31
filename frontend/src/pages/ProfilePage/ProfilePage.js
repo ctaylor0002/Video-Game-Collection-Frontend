@@ -14,6 +14,8 @@ const ProfilePage = (props) => {
     const [userPosts, setUserPosts] = useState([]);
     const [followers, setFollowers] = useState([]);
     const [following, setFollowing] = useState([]);
+    const [profilePic, setProfilePic] = useState("");
+    const [profile, setProfile] = useState("");
   
     // Here I think I will show there picture with an option to change it
     // Plus I think I will have a followers tab
@@ -25,7 +27,7 @@ const ProfilePage = (props) => {
         getUserPosts();
         getFollowers();
         getFollowing();
-
+        getProfileInfo();
         // fetchNewPosts();
         // fetchFollowers();
         
@@ -125,13 +127,21 @@ const ProfilePage = (props) => {
             }
         }
 
+        async function getProfileInfo() {
+            // event.preventDefault();
+            console.log(user)
+            const response = await axios.get(`http://127.0.0.1:8000/api/profile/${user.id}/`)
+            let pictureData = `http://127.0.0.1:8000${response.data.profile_picture}`
+            setProfilePic(pictureData);
+            setProfile(response.data);
+        }
     
    
     return ( 
         <div className='profile-container'>
             <FollowingPosts  posts={posts} likeOrDislikePost={likeOrDislikePost} />
             <MyPosts userPosts={userPosts} deletePost={deletePost} />
-            <UserTable followers={followers} following={following} />
+            <UserTable followers={followers} following={following} profilePic={profilePic} profile={profile}/>
 
             {/* <div className='profile-contatiner-posts'>
                 <div className='profile-contatiner-create-post'>

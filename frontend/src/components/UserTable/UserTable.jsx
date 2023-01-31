@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 
 const UserTable = (props) => {
 
     const [buttonCheck, setButtonCheck] = useState(0);
+    const [displayImg, setDisplayImg] = useState(props.profilePic)
 
 
     function displayData() {
-        console.log(props)
         if (buttonCheck === 0) {
             return (
                 <div>
@@ -24,7 +24,7 @@ const UserTable = (props) => {
                         })}
                 </div>
             )
-        } else {
+        } else if (buttonCheck === 1) {
             return (
             <div>
                 <h3>Following</h3>
@@ -40,16 +40,35 @@ const UserTable = (props) => {
                     })}
             </div>
             )
+        } else if(buttonCheck === 2) {
+            return (
+                <div>
+                    <form>
+                        <h3>{props.profile.user.username}</h3>
+                        <img src={(displayImg)} />
+                        <input id='image' type={'file'} accept="image/*" onChange={(event) => updateImg(event)}></input>
+                    </form>
+                </div>
+            )
         }
     }
 
+    function updateImg(event) {
+        //const objectUrl = URL.createObjectURL(img)
+        let temp = document.getElementById('image');
+        let sendData = temp.src = URL.createObjectURL(event.target.files[0]);
+        setDisplayImg(sendData)
+    }
+
     function setButtonState(value) {
-        console.log(value)
         if (value == 0) {
             setButtonCheck(0);
             displayData();
-        } else {
+        } else if (value == 1) {
             setButtonCheck(1);
+            displayData();
+        } else if (value == 2) {
+            setButtonCheck(2);
             displayData();
         }
     }
@@ -61,6 +80,7 @@ const UserTable = (props) => {
                 <div className='users-table-header'>
                     <button value={0} onClick={(event) => setButtonState(event.target.value)}>Followers</button>
                     <button value={1} onClick={(event) => setButtonState(event.target.value)}>Following</button>
+                    <button value={2} onClick={(event) => setButtonState(event.target.value)}>Update Profile</button>
                 </div>
                 <div>
                     <table>
