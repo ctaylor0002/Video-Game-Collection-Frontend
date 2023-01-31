@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import useAuth from '../../hooks/useAuth';
-import LikeButton from "../../components/Buttons/LikeButton/LikeButton";
 import axios from 'axios';
 import '../ProfilePage/ProfilePage.css'
-import DislikeButton from '../../components/Buttons/DislikeButton/DislikeButton';
-import UsersTable from './components/UsersTable/UsersTable';
+import UserTable from '../../components/UserTable/UserTable';
 import MyPosts from '../../components/MyPosts/MyPosts';
 import FollowingPosts from '../../components/FollowingPosts/FollowingPosts';
 
@@ -25,6 +23,8 @@ const ProfilePage = (props) => {
 
         getRecentPosts();
         getUserPosts();
+        getFollowers();
+        getFollowing();
 
         // fetchNewPosts();
         // fetchFollowers();
@@ -61,7 +61,7 @@ const ProfilePage = (props) => {
                     },
                 });
                 console.log(followersResponse.data);
-                setFollowers(followersResponse);
+                setFollowers(followersResponse.data);
             } catch (error) {
                 console.log(error.response.data);
             }
@@ -74,7 +74,7 @@ const ProfilePage = (props) => {
                         Authorization : "Bearer " + token,
                     },
                 });
-
+                console.log(followingResponse)
                 setFollowing(followingResponse.data);
             } catch (error) {
                 console.log(error.response.data);
@@ -123,18 +123,13 @@ const ProfilePage = (props) => {
             }
         }
 
-        // const dislikePost = async () => {
-        //     try {
-                
-        //     } catch (error) {
-                
-        //     }
-        // }
+    
    
     return ( 
         <div className='profile-container'>
             <FollowingPosts  posts={posts} likeOrDislikePost={likeOrDislikePost} />
             <MyPosts userPosts={userPosts} deletPost={deletePost} />
+            <UserTable followers={followers} following={following} />
 
             {/* <div className='profile-contatiner-posts'>
                 <div className='profile-contatiner-create-post'>
@@ -175,10 +170,7 @@ const ProfilePage = (props) => {
                 </div>
                 
 
-            <div className='profile-container-followers-followed'>
-                <UsersTable />
-            </div>
-
+            
        </div>
     );
 
