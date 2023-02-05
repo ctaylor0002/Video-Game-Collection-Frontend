@@ -5,13 +5,15 @@ const UserTable = (props) => {
 
     const [buttonCheck, setButtonCheck] = useState(0);
     const [displayImg, setDisplayImg] = useState("");
+    const [profileDesc, setProfileDesc] = useState("");
 
     useEffect(() => {
         setDisplayImg(props.profilePic)
+        setProfileDesc(props.profile.profile_description)
     },[props.profilePic])
 
     function displayData() {
-        console.log(props)
+
         if (buttonCheck === 0) {
             return (
                 <div>
@@ -47,18 +49,19 @@ const UserTable = (props) => {
         } else if(buttonCheck === 2) {
             return (
                 <div>
-                    <form>
+                    <form onSubmit={updateProfile} id="form">
                         <div>
                             <h3>{props.profile.user.username}</h3>
                         </div>
                         <div>
                             <img src={(displayImg)} />
-                            <input id='image' type={'file'} accept="image/*" onChange={(event) => updateImg(event)}></input>
+                            <input id='image' type={'file'} accept="image/*" name="profile_picture" onChange={(event) => updateImg(event)}></input>
                         </div>
                         <div>
                             <h3>Profile Description</h3>
-                            <textarea rows={"5"} columns={"50"} placeholder="Updated profile description..." className='profile-description-text-box'/>
+                            <textarea rows={"5"} columns={"50"} placeholder={profileDesc} className='profile-description-text-box' name="profile_description" onChange={(event) => setProfileDesc(event.target.value)}/>
                         </div>
+                        <button type='submit'>Update</button>
                    
                    
                    
@@ -66,6 +69,24 @@ const UserTable = (props) => {
                 </div>
             )
         }
+    }
+
+    async function updateProfile(event) {
+        event.preventDefault();
+        let form = document.getElementById('form')
+        let profile = new FormData(form);
+
+        // profile.append("file", displayImg);
+        // profile.append("string", profileDesc);
+        // let profile = {
+        //     profile_picture : displayImg,
+        //     profile_description : profileDesc
+        // };
+
+        console.log(profile)
+        props.updateProfile(profile);
+
+
     }
 
     function updateImg(event) {

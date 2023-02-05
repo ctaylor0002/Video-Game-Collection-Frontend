@@ -135,13 +135,26 @@ const ProfilePage = (props) => {
             setProfilePic(pictureData);
             setProfile(response.data);
         }
+
+        async function updateProfile(data) {
+            console.log(data)
+            
+            const response = await axios.patch(`http://127.0.0.1:8000/api/profile/update/${user.id}/`, data, {
+                    headers: {
+                        Authorization : "Bearer " + token,
+                        'Content-Type' : "multipart/form-data",
+                    },
+            });
+            setProfilePic(response.data.profile_picture);
+            console.log(response);
+        }
     
    
     return ( 
         <div className='profile-container'>
             <FollowingPosts  posts={posts} likeOrDislikePost={likeOrDislikePost} />
             <MyPosts userPosts={userPosts} deletePost={deletePost} />
-            <UserTable followers={followers} following={following} profilePic={profilePic} profile={profile}/>
+            <UserTable followers={followers} following={following} profilePic={profilePic} profile={profile} updateProfile={updateProfile}/>
 
             {/* <div className='profile-contatiner-posts'>
                 <div className='profile-contatiner-create-post'>

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import LikeButton from '../Buttons/LikeButton/LikeButton';
 import DislikeButton from '../Buttons/DislikeButton/DislikeButton';
-import axios from 'axios';
 
 const FollowingPosts = (props) => {
 
