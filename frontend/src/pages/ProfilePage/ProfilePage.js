@@ -127,6 +127,22 @@ const ProfilePage = (props) => {
             }
         }
 
+        async function createPost(data) {
+            console.log(data)
+            console.log(userPosts)
+            try {
+                let followingResponse = await axios.post('http://127.0.0.1:8000/api/posts/', data, {
+                    headers: {
+                        Authorization : "Bearer " + token,
+                    },
+                })
+                getUserPosts();
+                console.log(followingResponse);
+            } catch (error) {
+                
+            }
+        }
+
         async function getProfileInfo() {
             // event.preventDefault();
             console.log(user)
@@ -139,7 +155,7 @@ const ProfilePage = (props) => {
         async function updateProfile(data) {
             console.log(data)
             
-            const response = await axios.patch(`http://127.0.0.1:8000/api/profile/update/${user.id}/`, data, {
+           const response = await axios.patch(`http://127.0.0.1:8000/api/profile/update/${user.id}/`, data, {
                     headers: {
                         Authorization : "Bearer " + token,
                         'Content-Type' : "multipart/form-data",
@@ -153,7 +169,7 @@ const ProfilePage = (props) => {
     return ( 
         <div className='profile-container'>
             <FollowingPosts  posts={posts} likeOrDislikePost={likeOrDislikePost} />
-            <MyPosts userPosts={userPosts} deletePost={deletePost} />
+            <MyPosts userPosts={userPosts} deletePost={deletePost} createPost={createPost}/>
             <UserTable followers={followers} following={following} profilePic={profilePic} profile={profile} updateProfile={updateProfile}/>
 
             {/* <div className='profile-contatiner-posts'>
