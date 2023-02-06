@@ -37,7 +37,7 @@ const MyPosts = (props) => {
                                             <h3>{post.user.username}</h3>
                                             <button className='delete-button-tag' value={post.id} onClick={(event) => props.deletePost(event.target.value)}>X</button> 
                                         </div>
-                                        <div className="container-post-content">
+                                        <div className="container-post-content-data">
                                             <p>{post.post_content}</p>
                                         </div>
                                         <div className='container-post-like-dislike'>

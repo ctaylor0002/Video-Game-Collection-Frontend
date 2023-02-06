@@ -48,17 +48,21 @@ const UserTable = (props) => {
             )
         } else if(buttonCheck === 2) {
             return (
-                <div>
+                <div className='update-profile'>
                     <form onSubmit={updateProfile} id="form">
-                        <div>
+                        <div className='update-profile-header'>
                             <h3>{props.profile.user.username}</h3>
                         </div>
-                        <div>
+                        <div className='update-profile-img'>
+                            <h4>Profile Picture</h4>
                             <img src={(displayImg)} />
                             <input id='image' type={'file'} accept="image/*" name="profile_picture" onChange={(event) => updateImg(event)}></input>
                         </div>
-                        <div>
+                        <div className='update-profile-description'>
                             <h3>Profile Description</h3>
+                            <h4>Current Description:</h4>
+                            <p>{props.profile.profile_description}</p>
+                            <h4>Updated Description:</h4>
                             <textarea rows={"5"} columns={"50"} placeholder={profileDesc} className='profile-description-text-box' name="profile_description" onChange={(event) => setProfileDesc(event.target.value)}/>
                         </div>
                         <button type='submit'>Update</button>
@@ -75,22 +79,10 @@ const UserTable = (props) => {
         event.preventDefault();
         let form = document.getElementById('form')
         let profile = new FormData(form);
-
-        // profile.append("file", displayImg);
-        // profile.append("string", profileDesc);
-        // let profile = {
-        //     profile_picture : displayImg,
-        //     profile_description : profileDesc
-        // };
-
-        console.log(profile)
         props.updateProfile(profile);
-
-
     }
 
     function updateImg(event) {
-        //const objectUrl = URL.createObjectURL(img)
         let temp = document.getElementById('image');
         let sendData = temp.src = URL.createObjectURL(event.target.files[0]);
         setDisplayImg(sendData)
@@ -114,11 +106,11 @@ const UserTable = (props) => {
                 
             <div className='users-table'>
                 <div className='users-table-header'>
-                    <button value={0} onClick={(event) => setButtonState(event.target.value)}>Followers</button>
-                    <button value={1} onClick={(event) => setButtonState(event.target.value)}>Following</button>
-                    <button value={2} onClick={(event) => setButtonState(event.target.value)}>Update Profile</button>
+                    <button className='header' value={0} onClick={(event) => setButtonState(event.target.value)}>Followers</button>
+                    <button className='header' value={1} onClick={(event) => setButtonState(event.target.value)}>Following</button>
+                    <button className='header' value={2} onClick={(event) => setButtonState(event.target.value)}>Update Profile</button>
                 </div>
-                <div>
+                <div className='users-table-content'>
                     <table>
                         <tbody>
                             {displayData()}
