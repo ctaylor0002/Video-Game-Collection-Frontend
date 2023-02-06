@@ -144,7 +144,6 @@ const ProfilePage = (props) => {
         }
 
         async function getProfileInfo() {
-            // event.preventDefault();
             console.log(user)
             const response = await axios.get(`http://127.0.0.1:8000/api/profile/${user.id}/`)
             let pictureData = `http://127.0.0.1:8000${response.data.profile_picture}`

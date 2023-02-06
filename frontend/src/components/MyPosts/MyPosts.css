@@ -1,7 +1,6 @@
 .delete-button-tag {
     font-size: 24px;
     color: red;
-    margin-left: 50px;
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -14,6 +13,7 @@
 .container-post-user {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .container-post-like-dislike {
@@ -25,4 +25,17 @@
 .post-input-box {
     width: 100%;
     resize: none;
+    padding: 2px;
+}
+
+.profile-container-create-post-form {
+    border: 3px;
+    border-style: solid;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.profile-container-create-post-form-header {
+    display: flex;
+    justify-content: center;
 }

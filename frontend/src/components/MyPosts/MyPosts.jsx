@@ -19,10 +19,10 @@ const MyPosts = (props) => {
 
     
     return ( 
-        <div className='profile-contatiner-posts'>
-                <div className='profile-contatiner-create-post'>
-                    <form>
-                        <h3>Make a Post</h3>
+        <div className='profile-container-posts'>
+                <div className='profile-container-create-post'>
+                    <form className='profile-container-create-post-form'>
+                        <h3 className='profile-container-create-post-form-header'>Make a Post</h3>
                         <textarea rows={'5'} columns={'50'} className='post-input-box' type='text' placeholder='What game do you plan to talk about!' onChange={(event) => setPostData(event.target.value)}></textarea>
                         <button type='submit' onClick={handleSubmit}>Post</button>
                     </form>
