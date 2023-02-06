@@ -21,27 +21,7 @@ const HomePage = (props) => {
   }, [])
 
 
-  // useEffect(() => {
-  //   const fetchCars = async () => {
-  //     try {
-  //       let response = await axios.get("http://127.0.0.1:8000/api/cars/", {
-  //         headers: {
-  //           Authorization: "Bearer " + token,
-  //         },
-  //       });
-  //       setCars(response.data);
-  //     } catch (error) {
-  //       console.log(error.response.data);
-  //     }
-  //   };
-  //   fetchCars();
-  // }, [token]);
-
-
-  // useEffect(() => {
-    
-
-  // })
+  
 
   const fetchNewPosts = async () => {
      try {
@@ -53,6 +33,29 @@ const HomePage = (props) => {
      }
    }
 
+   async function likeOrDislikePost(id, type, data) {
+    try {
+        let followingResponse = await axios.patch(`http://127.0.0.1:8000/api/posts/type/${id}?type=${type}&value=${data}`, { type : data}, {
+            headers: {
+                Authorization : "Bearer " + token,
+            },
+        });
+        getRecentPosts();
+    } catch (error) {
+        console.log(error.response.data);
+    }
+}
+
+async function getRecentPosts() {
+  try {
+      let postsResponse = await axios.get(`http://127.0.0.1:8000/api/posts/${user.id}/`);
+
+      let tempPostsResponse = postsResponse.data;
+      setPosts(tempPostsResponse);
+  } catch (error) {
+      console.log(error.response.data);
+  }
+}
 
    // Add a way to change the color of the username if the post.user.staff is true
   return (
@@ -70,11 +73,11 @@ const HomePage = (props) => {
             <div className="container-post-likes-dislikes">
               <div className="container-post-likes-count">
                 <p key={post.id}>Likes: {post.likes}</p>
-                <LikeButton />
+                <LikeButton id={post.id} type={'like'} likeOrDislikePost={likeOrDislikePost} />
               </div>
               <div className="container-post-dislikes-count">
                 <p key={post.id}>Dislikes: {post.dislikes}</p>
-                <DislikeButton />
+                <DislikeButton id={post.id} type={'dislike'} likeOrDislikePost={likeOrDislikePost} />
               </div>
             </div>
           </div>
