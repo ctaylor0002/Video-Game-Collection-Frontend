@@ -20,6 +20,11 @@
 
 .profile-container-followers-followed {
     width: 33%;
+    border: 3px;
+    border-radius: 10px;
+    border-style: solid;
+    padding-top: 10px;
+    background-color: #817f7f;
 }
 
 .update-profile-img {
@@ -57,3 +62,5 @@ p {
     font-size: 14px;
     margin-left: 15px;
 }
+
+
