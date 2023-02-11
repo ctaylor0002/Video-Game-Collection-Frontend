@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './GameTable.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 const GameTable = (props) => {
 
     useEffect(() => {
@@ -9,7 +11,7 @@ const GameTable = (props) => {
 
     return ( 
         <div>
-            <table>
+            <table className='table table-dark'>
                 <tbody>
                     {props.collection.data &&
                     props.collection.data.map((videoGame) => {
@@ -23,7 +25,7 @@ const GameTable = (props) => {
                                 completion = "Completed"
                         }}
                         return (
-                            <tr>
+                            <tr >
                                 <td><img src={videoGame.video_game.video_game_image}/></td>
                                 {/* <td>{videoGame.user.username}</td> */}
                                 <td>{videoGame.video_game.video_game_title}</td>

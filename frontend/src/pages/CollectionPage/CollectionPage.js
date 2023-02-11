@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './CollectionPage.css'
 import GameTable from '../../components/GameTable/GameTable';
 import useAuth from '../../hooks/useAuth';
 import axios from 'axios';
@@ -24,9 +25,10 @@ const CollectionPage = (props) => {
     }
 
     return ( 
-        <div>
-        <GameTable collection={collection} getCollection={getCollection}/>
-
+        <div className='container'>
+            <h2 className='container-header'>Video Game Collection</h2>
+            <GameTable collection={collection} getCollection={getCollection}/>
+            {/* I need  */}
 
         </div>
      );

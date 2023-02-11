@@ -1,6 +1,6 @@
 body {
     background-color: rgb(160, 160, 160);
-    margin-top: 80px;
+    /* margin-top: 80px; */
     margin-bottom: 80px;
 
 }
@@ -13,9 +13,14 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    padding-top: 25px;
-    /* align-items: center; */
+    padding-top: 100px;
+    padding-bottom: 80px;
 
+}
+
+.container {
+    padding-top: 100px;
+    padding-bottom: 80px;
 }
 
 .container-post-dislikes-count {
