@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 const GameTable = (props) => {
 
+    const [searchTerm, setSearchTerm] = useState("");
+
     useEffect(() => {
 
     }, [])
@@ -11,11 +13,20 @@ const GameTable = (props) => {
 
     return ( 
         <div>
-            <h2 className='container-header'>Video Game Collection</h2>
+            <div className='game-table-header'>
+                <h2 className='container-header'>Video Game Collection</h2>
+                <input type="text" placeholder="Search Collection" className='game-table-search-bar' onChange={(event) => setSearchTerm(event.target.value)}/>
+            </div>
             <table className='table table-dark'>
                 <tbody>
                     {props.collection.data &&
-                    props.collection.data.map((videoGame) => {
+                    props.collection.data.filter((videoGame) => {
+                        if (searchTerm === "" ) {
+                            return videoGame;
+                        } else if (videoGame.video_game.video_game_title.toLowerCase().includes(searchTerm.toLowerCase())) {
+                            return videoGame;
+                        }
+                    }).map((videoGame) => {
                         {console.log(videoGame)}
                         let completion
                         {
