@@ -24,11 +24,20 @@ const CollectionPage = (props) => {
         }
     }
 
+    async function removeGame(id) {
+        console.log(id)
+        let response = await axios.delete(`http://127.0.0.1:8000/api/collection/${id}/update/`, {
+            headers: {
+                Authorization : "Bearer " + token,
+            },
+        });
+        getCollection();
+    }
+
     return ( 
         <div className='container'>
-            <h2 className='container-header'>Video Game Collection</h2>
-            <GameTable collection={collection} getCollection={getCollection}/>
-            {/* I need  */}
+
+            <GameTable collection={collection} getCollection={getCollection} removeGame={removeGame}/>
 
         </div>
      );

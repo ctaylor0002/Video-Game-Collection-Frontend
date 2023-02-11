@@ -11,6 +11,7 @@ const GameTable = (props) => {
 
     return ( 
         <div>
+            <h2 className='container-header'>Video Game Collection</h2>
             <table className='table table-dark'>
                 <tbody>
                     {props.collection.data &&
@@ -30,6 +31,8 @@ const GameTable = (props) => {
                                 {/* <td>{videoGame.user.username}</td> */}
                                 <td>{videoGame.video_game.video_game_title}</td>
                                 <td>{completion}</td>
+                                <td><button value={videoGame.id} onClick={(event) => props.removeGame(event.target.value)}>X</button></td>
+                                {/* <button className='delete-button-tag' value={post.id} onClick={(event) => props.deletePost(event.target.value)}>X</button>  */}
                                 
                             </tr>
                         )
