@@ -39,6 +39,20 @@ const CollectionPage = (props) => {
         }
     }
 
+    async function addGame(data) {
+        try {
+            let newGameResponse = await axios.post('http://127.0.0.1:8000/api/video_game/add/', data, {
+                headers: {
+                    Authorization : "Bearer " + token,
+                },
+            });
+            let tempGames = [...gameList, data]
+            setGameList(tempGames);
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    }
+
     async function getCollection() {
         try {
             let tempCollection = await axios.get(`http://127.0.0.1:8000/api/collection/${user.id}`, {
@@ -58,6 +72,20 @@ const CollectionPage = (props) => {
         }
     }
 
+    async function addCollection(data) {
+        try {
+            console.log(data)
+            let tempCollection = await axios.post(`http://127.0.0.1:8000/api/collection/${user.id}`, data,  {
+                headers: {
+                    Authorization : "Bearer " + token,
+                },
+            });
+            getCollection();
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    }
+
     async function removeGame(id) {
         console.log(id)
         let response = await axios.delete(`http://127.0.0.1:8000/api/collection/${id}/update/`, {
@@ -72,7 +100,7 @@ const CollectionPage = (props) => {
         <div className='container'>
             <button onClick={() => openModalPopUp()}>Add Video Games</button>
             <GameTable collection={collection} getCollection={getCollection} removeGame={removeGame}/>
-            {openModal && <ModalPopUp closeModal={setOpenModal} getAllGames={getAllGames} gameList={gameList} collection={gameNames} />}
+            {openModal && <ModalPopUp closeModal={setOpenModal} getAllGames={getAllGames} gameList={gameList} collection={gameNames} addCollection={addCollection} setGameList={setGameList} addGame={addGame} />}
         </div>
      );
 }

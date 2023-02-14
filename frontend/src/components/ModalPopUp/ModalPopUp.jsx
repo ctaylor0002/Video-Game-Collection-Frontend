@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useAuth from '../../hooks/useAuth';
 import axios from 'axios';
 import './ModalPopUp.css'
+import AddGameModalPopUp from '../AddGamesModalPopUp/AddGamesModalPopUp';
 
 const ModalPopUp = (props) => {
     
@@ -9,27 +10,35 @@ const ModalPopUp = (props) => {
     const [checkValue, setCheckValue] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
     const [user, token] = useAuth();
+    const [openModal, setOpenModal] = useState(false);
     
     useEffect(() => {
 
     }, [])
     
+    function openModalPopUp() {
+        if (openModal === false) {
+            setOpenModal(true);
+        } else {
+            setOpenModal(false);
+        }
+    }
     
 
     return ( 
-        <div className='modal-background'>
+        <div>
+            <div className='modal-background'>
             <div className='modal-container'>
                 <div className='modal-header'>
                     <input placeholder='Search For Game' onChange={(event) => setSearchTerm(event.target.value)} />
+                    <button onClick={((event) => openModalPopUp())}>More Games?</button>
                     <button onClick={() => props.closeModal(false)}>X</button>
                 </div>
                 <div className='modal-table'>
                     <table className='table table-dark'>
                         <tbody>
-                            {console.log(props.collection)}
                             {props.gameList &&
                             props.gameList.filter((videoGame) => {
-                                
                                 if (props.collection.includes(videoGame.video_game_title)) {
                                     
                                 } else {
@@ -41,7 +50,7 @@ const ModalPopUp = (props) => {
                                 }
                             }).map((videoGame) => {
                                 return(
-                                    <tr>
+                                    <tr onClick={() => props.addCollection(videoGame)}>
                                         <td><img src={videoGame.video_game_image}/></td>
                                         <td>{videoGame.video_game_title}</td>
                                     </tr>
@@ -53,36 +62,14 @@ const ModalPopUp = (props) => {
                 </div>
 
             </div>
+             
         </div>
-
-
-// {props.collection.data &&
-//     props.collection.data.filter((videoGame) => {
-//         if (searchTerm === "" ) {
-//             return videoGame;
-//         } else if (videoGame.video_game.video_game_title.toLowerCase().includes(searchTerm.toLowerCase())) {
-//             return videoGame;
-//         }
-//     }).map((videoGame) => {
-//         {console.log(videoGame)}
-//         let completion
-//         {
-//             if (videoGame.completed == 0) {
-//                 console.log(videoGame.completed == 0)
-//                 completion = "Not Completed"
-//             } else {
-//                 completion = "Completed"
-//         }}
-//         return (
-//             <tr >
-//                 <td><img src={videoGame.video_game.video_game_image}/></td>
-//                 {/* <td>{videoGame.user.username}</td> */}
-//                 <td>{videoGame.video_game.video_game_title}</td>
-//                 <td>{completion}</td>
-//                 <td><button value={videoGame.id} onClick={(event) => props.removeGame(event.target.value)}>X</button></td>
-//                 {/* <button className='delete-button-tag' value={post.id} onClick={(event) => props.deletePost(event.target.value)}>X</button>  */}
-                
-//             </tr>
+        <div className='search-game'>
+            {openModal && <AddGameModalPopUp closeModal={setOpenModal} setGameList={props.setGameList} getAllGames={props.getAllGames} addGame={props.addGame}/>}   
+        </div>
+        </div>
+        
+        
      );
 }
  
