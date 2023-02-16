@@ -6,14 +6,20 @@ import axios from "axios";
 import "../HomePage/HomePage.css"
 import LikeButton from "../../components/Buttons/LikeButton/LikeButton";
 import DislikeButton from "../../components/Buttons/DislikeButton/DislikeButton";
+import "react-widgets/styles.css";
+import Combobox from "react-widgets/Combobox"
+import { Link } from "react-router-dom"
+import { DropdownList } from "react-widgets";
 
 const HomePage = (props) => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
   // The "token" value is the JWT token that you will send in the header of any request requiring authentication
   //TODO: Add an AddCars Page to add a car for a logged in user's garage
   const [user, token] = useAuth();
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
+  const [usernames, setUsernames] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
   // const [cars, setCars] = useState([]);
 
   useEffect(() => {
@@ -27,6 +33,14 @@ const HomePage = (props) => {
       let usersResponse = await axios.get('http://127.0.0.1:8000/api/auth/users/');
       console.log(usersResponse)
       setUsers(usersResponse.data);
+
+      let usernames = usersResponse.data.map((ourUser) => {
+        return ourUser.username
+      })
+
+      setUsernames(usernames);
+
+
     } catch (error) {
       console.log(error.response.data);
     }
@@ -70,8 +84,11 @@ async function getRecentPosts() {
    // Add a way to change the color of the username if the post.user.staff is true
   return (
     <div className="container">
-      <div>
-        <input type='text' placeholder='Search Users...' />
+      <div className="container-search">
+        
+        <DropdownList defaultValue={""} data={usernames} hideEmptyPopup className="container-search-bar"  onChange={(event) => setSearchValue(event) }/>
+        <Link to={`/${searchValue}`} ><button>Search</button></Link>
+        {/* <input type='text' placeholder='Search Users...' />  busy='loading'*/}
       </div>
       <div className="container-posts">
         {posts &&

@@ -53,3 +53,12 @@ body {
     display: flex;
     align-items: center;
 }
+
+.container-search {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.rw-dropdown-list {
+    width: 300px;
+}
