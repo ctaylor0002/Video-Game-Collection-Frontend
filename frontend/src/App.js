@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import CollectionPage from "./pages/CollectionPage/CollectionPage";
+import UserPage from "./pages/UserPage/UserPage";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
@@ -93,25 +94,7 @@ function App() {
       }
     }
 
-  
-
-
-      // const likePost = async () => {
-      //     try {
-      //         let likePostResponse = await axios.patch()
-      //     } catch (error) {
-              
-      //     }
-      // }
-
-      // const dislikePost = async () => {
-      //     try {
-              
-      //     } catch (error) {
-              
-      //     }
-      // }
-
+    
 
   return (
     <div>
@@ -130,6 +113,7 @@ function App() {
         <Route path="/home" element={<HomePage />} />
         <Route path='/profile' element={<ProfilePage followers={followers} following={following} followingPosts={followingPosts} myPosts={myPosts}/>} />
         <Route path='/collection' element={<CollectionPage />} />
+        <Route path="/:username" element={<UserPage />} />
       </Routes>
       <Footer />
     </div>
