@@ -32,7 +32,7 @@ const MyPosts = (props) => {
                             props.userPosts.map((post) => {
                                 return (
                                 <div  key={post.id}>
-                                    <div className="container-post">
+                                    <div className="container-post" style={{'width' : '100%'}}>
                                         <div className="container-post-user">
                                             <h3>{post.user.username}</h3>
                                             <button className='delete-button-tag' value={post.id} onClick={(event) => props.deletePost(event.target.value)}>X</button> 

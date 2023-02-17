@@ -11,7 +11,7 @@ const FollowingPosts = (props) => {
                 props.posts.map((post) => {
                     return (
                         <div>
-                            <div className="container-post">
+                            <div className="container-post" style={{'width' : '100%'}}>
                                 {console.log(post)}
                                 <div className="container-post-user">
                                     <h3 key={post.id}>{post.user.username}</h3>

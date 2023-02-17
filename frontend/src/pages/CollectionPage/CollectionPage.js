@@ -41,12 +41,14 @@ const CollectionPage = (props) => {
 
     async function addGame(data) {
         try {
+            console.log(data)
             let newGameResponse = await axios.post('http://127.0.0.1:8000/api/video_game/add/', data, {
                 headers: {
                     Authorization : "Bearer " + token,
                 },
             });
             let tempGames = [...gameList, data]
+            console.log(tempGames)
             setGameList(tempGames);
         } catch (error) {
             console.log(error.response.data);
