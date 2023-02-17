@@ -101,7 +101,7 @@ const CollectionPage = (props) => {
     return ( 
         <div className='container'>
             <button onClick={() => openModalPopUp()}>Add Video Games</button>
-            <GameTable collection={collection} getCollection={getCollection} removeGame={removeGame}/>
+            <GameTable collection={collection} getCollection={getCollection} removeGame={removeGame} owner={true}/>
             {openModal && <ModalPopUp closeModal={setOpenModal} getAllGames={getAllGames} gameList={gameList} collection={gameNames} addCollection={addCollection} setGameList={setGameList} addGame={addGame} />}
         </div>
      );

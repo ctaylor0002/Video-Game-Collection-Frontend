@@ -87,7 +87,7 @@ async function getRecentPosts() {
       <div className="container-search">
         
         <DropdownList defaultValue={""} data={usernames} hideEmptyPopup className="container-search-bar"  onChange={(event) => setSearchValue(event) }/>
-        <Link to={`/${searchValue}`} ><button>Search</button></Link>
+        <Link to={`/${searchValue}`} userValue={searchValue}><button>Search</button></Link>
         {/* <input type='text' placeholder='Search Users...' />  busy='loading'*/}
       </div>
       <div className="container-posts">

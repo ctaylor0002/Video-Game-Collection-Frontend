@@ -36,17 +36,27 @@ const GameTable = (props) => {
                             } else {
                                 completion = "Completed"
                         }}
-                        return (
-                            <tr >
-                                <td><img src={videoGame.video_game.video_game_image}/></td>
-                                {/* <td>{videoGame.user.username}</td> */}
-                                <td>{videoGame.video_game.video_game_title}</td>
-                                <td>{completion}</td>
-                                <td><button value={videoGame.id} onClick={(event) => props.removeGame(event.target.value)}>X</button></td>
-                                {/* <button className='delete-button-tag' value={post.id} onClick={(event) => props.deletePost(event.target.value)}>X</button>  */}
-                                
-                            </tr>
-                        )
+                        {
+                            if (props.owner === true) {
+                                return (
+                                    <tr >
+                                        <td><img src={videoGame.video_game.video_game_image}/></td>
+                                        <td>{videoGame.video_game.video_game_title}</td>
+                                        <td>{completion}</td>
+                                        <td><button value={videoGame.id} onClick={(event) => props.removeGame(event.target.value)}>X</button></td>                                       
+                                    </tr>
+                                )
+                            } else {
+                                return (
+                                    <tr >
+                                        <td><img src={videoGame.video_game.video_game_image}/></td>
+                                        <td>{videoGame.video_game.video_game_title}</td>
+                                        <td>{completion}</td>               
+                                    </tr>
+                                )
+                            }
+                        }
+                       
                     })}
                 </tbody>
                 
