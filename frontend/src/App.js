@@ -110,10 +110,10 @@ function App() {
         />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/home" element={<HomePage setFollowing={fetchNewPosts} following={following}/>} />
         <Route path='/profile' element={<ProfilePage followers={followers} following={following} followingPosts={followingPosts} myPosts={myPosts}/>} />
         <Route path='/collection' element={<CollectionPage />} />
-        <Route path="/:username" element={<UserPage />} />
+        <Route path="/:username" element={<UserPage following={following} setFollowing={setFollowing} />} />
       </Routes>
       <Footer />
     </div>

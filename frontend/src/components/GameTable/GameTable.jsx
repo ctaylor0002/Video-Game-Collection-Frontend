@@ -27,11 +27,11 @@ const GameTable = (props) => {
                             return videoGame;
                         }
                     }).map((videoGame) => {
-                        {console.log(videoGame)}
+                        // {console.log(videoGame)}
                         let completion
                         {
                             if (videoGame.completed == 0) {
-                                console.log(videoGame.completed == 0)
+                                // console.log(videoGame.completed == 0)
                                 completion = "Not Completed"
                             } else {
                                 completion = "Completed"
