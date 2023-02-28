@@ -83,6 +83,7 @@ const CollectionPage = (props) => {
                 },
             });
             getCollection();
+            openModalPopUp();
         } catch (error) {
             console.log(error.response.data);
         }

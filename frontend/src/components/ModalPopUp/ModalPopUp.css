@@ -25,3 +25,7 @@
 .search-game {
     z-index: 2;
 }
+
+table tbody tr:hover td {
+    background-color: rgb(56, 61, 66);
+}

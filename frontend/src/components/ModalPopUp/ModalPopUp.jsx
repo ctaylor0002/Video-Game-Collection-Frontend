@@ -50,7 +50,7 @@ const ModalPopUp = (props) => {
                                 }
                             }).map((videoGame) => {
                                 return(
-                                    <tr onClick={() => props.addCollection(videoGame)}>
+                                    <tr className='game-row' onClick={() => props.addCollection(videoGame)}>
                                         <td><img src={videoGame.video_game_image}/></td>
                                         <td>{videoGame.video_game_title}</td>
                                     </tr>
