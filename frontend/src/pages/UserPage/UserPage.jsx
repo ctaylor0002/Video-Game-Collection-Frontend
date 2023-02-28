@@ -18,12 +18,13 @@ const UserPage = (props) => {
 
     useEffect(() => {
         getCollection();
-        getProfileInfo();
+        // getProfileInfo();
 
         let tempData = []
+        console.log(props.following)
         props.following.map((e) => {
-            tempData.push(e.follower_user_id)
-            console.log(e.follower_user_id)
+            tempData.push(e.follower_user.id)
+            console.log(e.follower_user)
             console.log(tempData)
             
         })
@@ -34,6 +35,11 @@ const UserPage = (props) => {
         try {
             let tempUser = await axios.get(`http://127.0.0.1:8000/api/auth/${username}/`);
             setUserID(tempUser.data[0].id);
+            console.log(user)
+            const response = await axios.get(`http://127.0.0.1:8000/api/profile/${tempUser.data[0].id}/`)
+            let pictureData = `http://127.0.0.1:8000${response.data.profile_picture}`
+            setProfilePic(pictureData);
+            setProfile(response.data);
             console.log(tempUser.data)
             let tempCollection = await axios.get(`http://127.0.0.1:8000/api/collection/${tempUser.data[0].id}`, {
                 headers: {
@@ -55,8 +61,9 @@ const UserPage = (props) => {
             follower_user : user.id,
             main_user : profile.user.id,
         }
-        console.log(newFollow)
-        followUser(newFollow)
+        console.log(newFollow);
+        followUser(newFollow);
+        document.getElementById("follow-button").innerHTML = "Following";
     }
 
     function handleDelete(event) {
@@ -67,16 +74,13 @@ const UserPage = (props) => {
             main_user : profile.user.id,
         }
 
-        deleteFollow(data)
+        deleteFollow(data);
+        document.getElementById("follow-button").innerHTML = "Follow";
     }
 
-    async function getProfileInfo() {
-        console.log(user)
-        const response = await axios.get(`http://127.0.0.1:8000/api/profile/${user.id}/`)
-        let pictureData = `http://127.0.0.1:8000${response.data.profile_picture}`
-        setProfilePic(pictureData);
-        setProfile(response.data);
-    }
+    // async function getProfileInfo() {
+        
+    // }
 
     async function deleteFollow(data) {
         try {
@@ -85,7 +89,7 @@ const UserPage = (props) => {
                                 Authorization : "Bearer " + token,
                             },
                         })
-            // props.setFollowing()
+            console.log(props)
             
         } catch (error) {
             console.log(error.response.data)
@@ -99,7 +103,8 @@ const UserPage = (props) => {
                                 Authorization : "Bearer " + token,
                             },
                         })
-            // props.setFollowing()
+                        console.log(props)
+                        props.setFollowing()
             
         } catch (error) {
             console.log(error.response.data)
@@ -132,30 +137,21 @@ const UserPage = (props) => {
                 </div>
                 <div className='profile-desc'>
                     { (() => {
+                        console.log(followedUsers)
                         console.log(followedUsers.includes(userID))
                         if (followedUsers.includes(userID)) {
                             return (
-                                <button value={'unfollow'} onClick={handleDelete}>Following</button>
+                                <button id="follow-button" value={'unfollow'} onClick={handleDelete}>Following</button>
                             )
                         } else {
                             return (
-                                <button onClick={handleSubmit}>Follow</button>
+                                <button id="follow-button" onClick={handleSubmit}>Follow</button>
                             )
                         }
                     })()
                        
                     }
 
-                    {/* {
-                    if (props.following.includes(username) === true) {
-                        return (
-                            <button>Follow</button>
-                        )
-                        
-                    } else {
-                        
-                    }} */}
-                    
                     <h3>About Me!</h3>
                     <p>{profile.profile_description}</p>
                 </div>

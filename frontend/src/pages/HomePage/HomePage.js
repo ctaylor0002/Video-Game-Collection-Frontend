@@ -7,9 +7,10 @@ import "../HomePage/HomePage.css"
 import LikeButton from "../../components/Buttons/LikeButton/LikeButton";
 import DislikeButton from "../../components/Buttons/DislikeButton/DislikeButton";
 import "react-widgets/styles.css";
-import Combobox from "react-widgets/Combobox"
-import { Link } from "react-router-dom"
 import { DropdownList } from "react-widgets";
+import { Link } from "react-router-dom"
+
+
 
 const HomePage = (props) => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
@@ -27,6 +28,7 @@ const HomePage = (props) => {
     fetchNewPosts();
     getUsers();
     console.log(posts);
+
   }, [])
 
   async function getUsers() {
@@ -53,6 +55,7 @@ const HomePage = (props) => {
        let response = await axios.get(`http://127.0.0.1:8000/api/posts/${user.id}/`)
        //console.log(response)
        setPosts(response.data)
+       startUp();
      } catch (error) {
       console.log(error.response.data);
      }
@@ -82,6 +85,26 @@ async function getRecentPosts() {
   }
 }
 
+function startUp() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      console.log(entry);
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      } else {
+        entry.target.classList.remove('show');
+      }
+    });
+  });
+
+  const hiddenElements = document.querySelectorAll('.hidden');
+  hiddenElements.forEach((el) => observer.observe(el));
+}
+
+
+
+
+
    // Add a way to change the color of the username if the post.user.staff is true
   return (
     <div className="container">
@@ -89,12 +112,11 @@ async function getRecentPosts() {
         
         <DropdownList defaultValue={""} data={usernames} hideEmptyPopup className="container-search-bar"  onChange={(event) => setSearchValue(event) }/>
         <Link to={`/${searchValue}`} userValue={searchValue} setFollowing={props.setFollowing} following={props.following}><button>Search</button></Link>
-        {/* <input type='text' placeholder='Search Users...' />  busy='loading'*/}
       </div>
       <div className="container-posts">
         {posts &&
           posts.map((post) => (
-            <div className="container-post">
+            <div className="hidden container-post" key={post.id}>
               {console.log(post)}
               <div className="container-post-user">
                 <h3 key={post.id}>{post.user.username}</h3>
@@ -116,13 +138,7 @@ async function getRecentPosts() {
           ))
         }
       </div>
-      {/* <h1>Home Page for {user.username}!</h1>
-      {cars &&
-        cars.map((car) => (
-          <p key={car.id}>
-            {car.year} {car.model} {car.make}
-          </p>
-        ))} */}
+      
     </div>
   );
 };

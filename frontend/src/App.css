@@ -37,7 +37,7 @@ button:hover {
 
 .container {
   margin: 0 auto;
-  max-width: 600px;
+  /* max-width: 600px; */
   overflow: auto;
   text-align: center;
 }

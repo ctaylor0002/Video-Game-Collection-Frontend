@@ -20,7 +20,7 @@ const UserTable = (props) => {
                     <h3>Followers</h3>
                     {props.followers &&
                     props.followers.map((follower) => {
-                
+                        console.log(follower)
                             return (
                                 <tr>
                                     <td>{follower.main_user.username}</td>
