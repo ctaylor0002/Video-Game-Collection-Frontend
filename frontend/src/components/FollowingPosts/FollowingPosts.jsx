@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import LikeButton from '../Buttons/LikeButton/LikeButton';
 import DislikeButton from '../Buttons/DislikeButton/DislikeButton';
 
 const FollowingPosts = (props) => {
 
+    // useEffect(() => {
+    //     props.setFollowing();
+    // }, [])
     return ( 
         <div className='follower-posts'>
             <h3 className='followers-posts-header'>Followered Users Posts</h3>

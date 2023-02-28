@@ -28,23 +28,44 @@ const ProfilePage = (props) => {
         getFollowers();
         getFollowing();
         getProfileInfo();
+        getFollowingPosts();
         // fetchNewPosts();
         // fetchFollowers();
         
       }, [])
+      
 
         async function getRecentPosts() {
             try {
                 let postsResponse = await axios.get(`http://127.0.0.1:8000/api/posts/${user.id}/`);
 
+
+                let followingResponse = await axios.get(`http://127.0.0.1:8000/api/followers/`, {
+                    headers: {
+                        Authorization : "Bearer " + token,
+                    },
+                });
                 let tempPostsResponse = postsResponse.data;
+                let testPosts = [];
+
+
+
+                for(let i = 0; i < followingResponse.data.length; i++) {
+
+                    let tempFollowingPosts = tempPostsResponse.filter(function(el) {
+                        console.log(followingResponse.data[i].follower_user.id)
+                        return el.user.id === followingResponse.data[i].follower_user.id
+                    });   
+                    testPosts = testPosts.concat(tempFollowingPosts);
 
                 tempPostsResponse = tempPostsResponse.filter(function(el) {
             
                     return el.user.id != user.id
                 });
+                console.log(tempPostsResponse)
                 //tempPostsResponse.slice(0,19); // Limits to 20 posts (I may move this to the backend)
                 setPosts(tempPostsResponse);
+            }
             } catch (error) {
                 console.log(error.response.data);
             }
@@ -96,20 +117,18 @@ const ProfilePage = (props) => {
 
         async function getFollowingPosts() {
             let tempPosts = [];
-
+            console.log(following)
             for(let i = 0; i < following.length; i++) {
 
                 let posts = posts.filter(function(el) {
-
+                    console.log(el)
                 return el.user.id === following[i].follower_user.id
                 });   
 
             tempPosts = tempPosts.concat(following);
-            // console.log(testPosts)
-        
+            console.log(tempPosts)
             }
         
-  
             setPosts(tempPosts);
             console.log(posts)
         }
@@ -167,7 +186,7 @@ const ProfilePage = (props) => {
    
     return ( 
         <div className='profile-container'>
-            <FollowingPosts  posts={posts} likeOrDislikePost={likeOrDislikePost} />
+            <FollowingPosts  posts={posts} likeOrDislikePost={likeOrDislikePost} setFollowing={props.setFollowing} />
             <MyPosts userPosts={userPosts} deletePost={deletePost} createPost={createPost}/>
             <UserTable followers={followers} following={following} profilePic={profilePic} profile={profile} updateProfile={updateProfile}/>
 

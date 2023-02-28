@@ -24,7 +24,6 @@ const HomePage = (props) => {
   // const [cars, setCars] = useState([]);
 
   useEffect(() => {
-    props.setFollowing();
     fetchNewPosts();
     getUsers();
     console.log(posts);
@@ -101,6 +100,19 @@ function startUp() {
   hiddenElements.forEach((el) => observer.observe(el));
 }
 
+function linkLocation() {
+  if (searchValue == user.username) {
+    return (
+      <Link to={`/profile`} userValue={searchValue} setFollowing={props.setFollowing} following={props.following} followers={props.followers} followingPosts={props.followingPosts} ><button>Search</button></Link>
+      )
+      
+    } else {
+      return (
+      <Link to={`/${searchValue}`} userValue={searchValue} setFollowing={props.setFollowing} following={props.following}><button>Search</button></Link>
+    )
+
+  }
+}
 
 
 
@@ -111,7 +123,9 @@ function startUp() {
       <div className="container-search">
         
         <DropdownList defaultValue={""} data={usernames} hideEmptyPopup className="container-search-bar"  onChange={(event) => setSearchValue(event) }/>
-        <Link to={`/${searchValue}`} userValue={searchValue} setFollowing={props.setFollowing} following={props.following}><button>Search</button></Link>
+        {linkLocation()}
+        {/* Add an if statement that if the searchValue equals the user.username Link to the profilepage of the user */}
+        
       </div>
       <div className="container-posts">
         {posts &&
@@ -127,11 +141,11 @@ function startUp() {
               <div className="container-post-likes-dislikes">
                 <div className="container-post-likes-count">
                   <p key={post.id}>Likes: {post.likes}</p>
-                  <LikeButton id={post.id} type={'like'} likeOrDislikePost={likeOrDislikePost} />
+                  <LikeButton className={'jump-shake'} id={post.id} type={'like'} likeOrDislikePost={likeOrDislikePost} />
                 </div>
                 <div className="container-post-dislikes-count">
                   <p key={post.id}>Dislikes: {post.dislikes}</p>
-                  <DislikeButton id={post.id} type={'dislike'} likeOrDislikePost={likeOrDislikePost} />
+                  <DislikeButton className={'jump-shake'} id={post.id} type={'dislike'} likeOrDislikePost={likeOrDislikePost} />
                 </div>
               </div>
             </div>

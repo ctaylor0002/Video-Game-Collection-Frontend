@@ -37,7 +37,7 @@ function App() {
   // Plus I think I will have a following tab
 
     //I should probably make the posts there own component so all of them dont need to be rerendered for one change
-  const fetchNewPosts = async () => {
+  async function fetchNewPost() {
       try {
         let postsResponse = await axios.get(`http://127.0.0.1:8000/api/posts/${user.id}/`);
 
@@ -112,7 +112,7 @@ function App() {
         />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/home" element={<HomePage setFollowing={fetchNewPosts} following={following}/>} />
+        <Route path="/home" element={<HomePage setFollowing={fetchNewPost} following={following} followers={followers} followingPosts={followingPosts} setFollowers={setFollowers}/>} />
         <Route path='/profile' element={<ProfilePage followers={followers} following={following} followingPosts={followingPosts} myPosts={myPosts}/>} />
         <Route path='/collection' element={<CollectionPage />} />
         <Route path="/:username" element={<UserPage following={following} setFollowing={setFollowing} />} />

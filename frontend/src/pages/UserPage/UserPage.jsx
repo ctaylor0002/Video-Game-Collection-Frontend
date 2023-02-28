@@ -58,8 +58,8 @@ const UserPage = (props) => {
         event.preventDefault();
 
         let newFollow = {
-            follower_user : user.id,
-            main_user : profile.user.id,
+            follower_user : profile.user.id,
+            main_user : user.id,
         }
         console.log(newFollow);
         followUser(newFollow);
@@ -70,8 +70,8 @@ const UserPage = (props) => {
         event.preventDefault();
 
         let data = {
-            follower_user : user.id,
-            main_user : profile.user.id,
+            follower_user : profile.user.id,
+            main_user : user.id,
         }
 
         deleteFollow(data);
