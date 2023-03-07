@@ -13,11 +13,12 @@ const GameTable = (props) => {
     function collectionCheck() {
         console.log(props.collection.data)
 
-        if (props.collection.data == []) {
+        if (props.collection.data == null) {
+            console.log('Works')
             return (
                 <h2 className='collection-title'>No Collection Found</h2>
-            )
-        } else {
+            );
+        } else if(props.collection.data != null) {
 
             const returnData = props.collection.data &&
                 props.collection.data.filter((videoGame) => {
@@ -58,29 +59,33 @@ const GameTable = (props) => {
                                 </tr>
                             )
                         }
+                        
                     }
                    
                 })
-            return returnData;
+                return (
+                    <div>
+                        <div className='game-table-header'>
+                            <h2 className='container-header'>Video Game Collection</h2>
+                            <input type="text" placeholder="Search Collection" className='game-table-search-bar' onChange={(event) => setSearchTerm(event.target.value)}/>
+                        </div>
+                        <div className='modal-table'>
+                            <table className='table table-dark'>
+                                <tbody>
+                                    {returnData}
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                );
+            
                     
         }
     }
 
     return ( 
-        <div>
-            <div className='game-table-header'>
-                <h2 className='container-header'>Video Game Collection</h2>
-                <input type="text" placeholder="Search Collection" className='game-table-search-bar' onChange={(event) => setSearchTerm(event.target.value)}/>
-            </div>
-            <table className='table table-dark'>
-                <tbody>
-                    {collectionCheck()}
-                </tbody>
-                
-
-
-            </table>
-        </div>
+        collectionCheck()
      );
 }
  

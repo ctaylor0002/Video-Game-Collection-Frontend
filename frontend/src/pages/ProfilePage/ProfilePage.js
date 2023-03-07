@@ -28,7 +28,7 @@ const ProfilePage = (props) => {
         getFollowers();
         getFollowing();
         getProfileInfo();
-        getFollowingPosts();
+        // getFollowingPosts();
         // fetchNewPosts();
         // fetchFollowers();
         
@@ -54,18 +54,21 @@ const ProfilePage = (props) => {
 
                     let tempFollowingPosts = tempPostsResponse.filter(function(el) {
                         console.log(followingResponse.data[i].follower_user.id)
+                        console.log(el.user.id)
                         return el.user.id === followingResponse.data[i].follower_user.id
                     });   
                     testPosts = testPosts.concat(tempFollowingPosts);
+                    
 
-                tempPostsResponse = tempPostsResponse.filter(function(el) {
-            
+                   
+                }
+                console.log(testPosts)
+                testPosts = testPosts.filter(function(el) {
+                    console.log(el.user.id)
+                    console.log(user.id)
                     return el.user.id != user.id
                 });
-                console.log(tempPostsResponse)
-                //tempPostsResponse.slice(0,19); // Limits to 20 posts (I may move this to the backend)
-                setPosts(tempPostsResponse);
-            }
+                setPosts(testPosts)
             } catch (error) {
                 console.log(error.response.data);
             }
