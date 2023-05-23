@@ -1,6 +1,8 @@
 // General Imports
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
+import { RecoilRoot, useRecoilValueLoadable } from "recoil";
+import { profilePicState, fetchProfilePic } from "./recoilState";
 
 // Pages Imports
 import HomePage from "./pages/HomePage/HomePage";
@@ -22,7 +24,15 @@ import React, { useState, useEffect } from "react";
 import useAuth from "./hooks/useAuth";
 
 function App() {
+  
   const [user, token] = useAuth();
+  const profilePic = useRecoilValueLoadable(fetchProfilePic(user.id));
+  console.log(profilePic)
+  // useEffect(()=>{
+  //   console.log('changing state', profilePic.state)
+  // },[profilePic.state])
+
+
   const [followingPosts, setFollowingPosts] = useState([]);
   const [myPosts, setMyPosts] = useState([]);
   const [followers, setFollowers] = useState([]);
@@ -96,55 +106,62 @@ function App() {
   };
 
   return (
-    <div id="main-parent">
-      <Navbar />
-      <div id="page-body">
-        
-         <Routes>
-          <Route
-            path="/"
-            element={
-              <PrivateRoute>
-                <HomePage />
-              </PrivateRoute>
-            }
-          />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route
-            path="/home"
-            element={
-              <HomePage
-                setFollowing={fetchNewPost}
-                following={following}
-                followers={followers}
-                followingPosts={followingPosts}
-                setFollowers={setFollowers}
-              />
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <ProfilePage
-                followers={followers}
-                following={following}
-                followingPosts={followingPosts}
-                myPosts={myPosts}
-              />
-            }
-          />
-          <Route path="/collection" element={<CollectionPage />} />
-          <Route
-            path="/:username"
-            element={
-              <UserPage following={following} setFollowing={setFollowing} />
-            }
-          />
-        </Routes>
+      <div id="main-parent">
+        <Navbar />
+        <div id="page-body">
+          <div className="nav-user">
+            <img
+          src={`http://127.0.0.1:8000${profilePic.contents.profile_picture}`}
+          className="navigation-bar-locations-user-profile-picture"
+        />
+            <h2>Welcome, {user.username}</h2>
+            {/* <h2>Welcome, loggedInUser</h2> */}
+          </div>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <PrivateRoute>
+                  <HomePage />
+                </PrivateRoute>
+              }
+            />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route
+              path="/home"
+              element={
+                <HomePage
+                  setFollowing={fetchNewPost}
+                  following={following}
+                  followers={followers}
+                  followingPosts={followingPosts}
+                  setFollowers={setFollowers}
+                />
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProfilePage
+                  followers={followers}
+                  following={following}
+                  followingPosts={followingPosts}
+                  myPosts={myPosts}
+                />
+              }
+            />
+            <Route path="/collection" element={<CollectionPage />} />
+            <Route
+              path="/:username"
+              element={
+                <UserPage following={following} setFollowing={setFollowing} />
+              }
+            />
+          </Routes>
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
   );
 }
 

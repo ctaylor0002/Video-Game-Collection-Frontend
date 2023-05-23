@@ -53,30 +53,10 @@ const NavBar = () => {
           </Link>
         </ul>
       </div>
-
-      <div className="nav-user">
-        <img
-          src={ProfilePic}
-          className="navigation-bar-locations-user-profile-picture"
-        />
-        {/* <h2>Welcome, {user.username}</h2> */}
-        <h2>Welcome, loggedInUser</h2>
+      <div>
+        {/* for flex purposes */}
       </div>
     </nav>
-    // <div className='navigation-bar'>
-    //     <div className='navigation-bar-logo'>
-    //
-    //     </div>
-
-    //     <div className='navigation-bar-title'>
-    //
-    //     </div>
-
-    //     <div className='navigation-bar-locations'>
-
-    //     </div>
-
-    // </div>
   );
 };
 
