@@ -8,7 +8,6 @@
     left: 0;
     justify-content: center;
     align-items: center;
-    z-index: 2;
 }
 
 .modal-container-two {
@@ -21,5 +20,4 @@
     display: flex;
     flex-direction: column;
     padding: 25px;
-    z-index: 2;
 }
