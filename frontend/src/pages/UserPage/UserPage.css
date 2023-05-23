@@ -24,3 +24,8 @@
     font-size: 36px;
 }
 
+.desc {
+    display: flex;
+    width: 250px;
+}
+

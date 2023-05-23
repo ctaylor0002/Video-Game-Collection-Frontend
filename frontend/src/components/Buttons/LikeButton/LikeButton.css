@@ -4,7 +4,7 @@
 
 img {
     width: 40px;
-    margin-left: 10px;
+    /* margin-left: 10px; */
 }
 
 img.jump-shake:hover {

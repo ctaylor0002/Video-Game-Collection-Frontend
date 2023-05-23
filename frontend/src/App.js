@@ -18,14 +18,10 @@ import Footer from "./components/Footer/Footer";
 import PrivateRoute from "./utils/PrivateRoute";
 
 import axios from "axios";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import useAuth from "./hooks/useAuth";
 
-
-
-
 function App() {
-
   const [user, token] = useAuth();
   const [followingPosts, setFollowingPosts] = useState([]);
   const [myPosts, setMyPosts] = useState([]);
@@ -36,87 +32,117 @@ function App() {
   // Plus I think I will have a followers tab
   // Plus I think I will have a following tab
 
-    //I should probably make the posts there own component so all of them dont need to be rerendered for one change
+  //I should probably make the posts there own component so all of them dont need to be rerendered for one change
   async function fetchNewPost() {
-      try {
-        let postsResponse = await axios.get(`http://127.0.0.1:8000/api/posts/${user.id}/`);
+    try {
+      let postsResponse = await axios.get(
+        `http://127.0.0.1:8000/api/posts/${user.id}/`
+      );
 
-        let tempPostsResponse = postsResponse.data;
-        console.log(tempPostsResponse)
+      let tempPostsResponse = postsResponse.data;
+      console.log(tempPostsResponse);
 
-        let followingResponse = await axios.get(`http://127.0.0.1:8000/api/followers/`, {
+      let followingResponse = await axios.get(
+        `http://127.0.0.1:8000/api/followers/`,
+        {
           headers: {
-              Authorization : "Bearer " + token,
+            Authorization: "Bearer " + token,
           },
-      });
+        }
+      );
 
-        setFollowing(followingResponse.data);
+      setFollowing(followingResponse.data);
 
-        let tempFollowingResponse = followingResponse.data;
- 
-        let testPosts = [];
+      let tempFollowingResponse = followingResponse.data;
 
-        for(let i = 0; i < tempFollowingResponse.length; i++) {
+      let testPosts = [];
 
-          let tempFollowingPosts = tempPostsResponse.filter(function(el) {
-
-              return el.user.id === tempFollowingResponse[i].follower_user.id
-          });   
-          testPosts = testPosts.concat(tempFollowingPosts);
-          // console.log(testPosts)
-      
+      for (let i = 0; i < tempFollowingResponse.length; i++) {
+        let tempFollowingPosts = tempPostsResponse.filter(function (el) {
+          return el.user.id === tempFollowingResponse[i].follower_user.id;
+        });
+        testPosts = testPosts.concat(tempFollowingPosts);
+        // console.log(testPosts)
       }
 
       setFollowingPosts(testPosts);
 
       // Getting My Posts
-      let tempMyPosts = tempPostsResponse.filter(function(el) {
-          
-          return el.user.id === user.id
+      let tempMyPosts = tempPostsResponse.filter(function (el) {
+        return el.user.id === user.id;
       });
       setMyPosts(tempMyPosts);
-      console.log(myPosts)
-
-      } catch (error) {
-       console.log(error.response.data);
-      }
+      console.log(myPosts);
+    } catch (error) {
+      console.log(error.response.data);
     }
+  }
 
-    const fetchFollowers = async () => {
-      try {
-          let followersResponse = await axios.get('http://127.0.0.1:8000/api/followers/list/', {
-              headers: {
-                  Authorization : "Bearer " + token,
-              },
-          });
-          console.log(followersResponse.data);
-          setFollowers(followersResponse);
-      } catch (error) {
-          console.log(error.response.data);
-      }
+  const fetchFollowers = async () => {
+    try {
+      let followersResponse = await axios.get(
+        "http://127.0.0.1:8000/api/followers/list/",
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      console.log(followersResponse.data);
+      setFollowers(followersResponse);
+    } catch (error) {
+      console.log(error.response.data);
     }
-
-    
+  };
 
   return (
-    <div>
+    <div id="main-parent">
       <Navbar />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <PrivateRoute>
-              <HomePage />
-            </PrivateRoute>
-          }
-        />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/home" element={<HomePage setFollowing={fetchNewPost} following={following} followers={followers} followingPosts={followingPosts} setFollowers={setFollowers}/>} />
-        <Route path='/profile' element={<ProfilePage followers={followers} following={following} followingPosts={followingPosts} myPosts={myPosts}/>} />
-        <Route path='/collection' element={<CollectionPage />} />
-        <Route path="/:username" element={<UserPage following={following} setFollowing={setFollowing} />} />
-      </Routes>
+      <div id="page-body">
+        
+         <Routes>
+          <Route
+            path="/"
+            element={
+              <PrivateRoute>
+                <HomePage />
+              </PrivateRoute>
+            }
+          />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/home"
+            element={
+              <HomePage
+                setFollowing={fetchNewPost}
+                following={following}
+                followers={followers}
+                followingPosts={followingPosts}
+                setFollowers={setFollowers}
+              />
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProfilePage
+                followers={followers}
+                following={following}
+                followingPosts={followingPosts}
+                myPosts={myPosts}
+              />
+            }
+          />
+          <Route path="/collection" element={<CollectionPage />} />
+          <Route
+            path="/:username"
+            element={
+              <UserPage following={following} setFollowing={setFollowing} />
+            }
+          />
+        </Routes>
+      </div>
       <Footer />
     </div>
   );

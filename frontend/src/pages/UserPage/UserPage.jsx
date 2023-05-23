@@ -153,7 +153,7 @@ const UserPage = (props) => {
                     }
 
                     <h3>About Me!</h3>
-                    <p>{profile.profile_description}</p>
+                    <p className='desc'>{profile.profile_description}</p>
                 </div>
             </div>
             <div className='collection'>
