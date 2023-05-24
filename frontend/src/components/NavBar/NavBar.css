@@ -1,28 +1,21 @@
 
 
-li {
+.nav-link-anchor {
   transition: 1s;
   font-size: 16px;
   color: white;
 }
 
-a {
-  text-decoration: none;
+
+#nav-website-name {
+  padding: 25px 0px;
 }
-
-
-
-nav h1 {
+#website-header {
   color: white;
 }
 
 
-/* 
-.navigation-bar-logo-image {
-  height: 40px;
-} */
-
-nav {
+.nav-bar-container {
     background: rgb(44, 44, 44);
     box-shadow: 4px 2px 5px gray;
     height: 150px;
@@ -42,29 +35,25 @@ nav > div {
   list-style-type: none;
 }
 
-#nav-links h1 {
-  text-align: center;
-}
-
-.nav-user {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-}
-
 #nav-website-name {
   display: flex;
   justify-content: center;
 }
 
 @media screen and (min-width: 768px){
-  nav {
+  .nav-bar-container {
       height: min-content;
       display: flex;
       flex-direction: row;
       align-items: center;
-      padding: 20px;
+      justify-content: left;
+      padding: 10px;
+  }
+
+  #nav-website-name {
+    display: flex;
+    justify-content: left;
+    padding: 10px 20px;
   }
 
   /* Add a transition of 1 second back after not hovering */

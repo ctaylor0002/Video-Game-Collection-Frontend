@@ -4,20 +4,25 @@ import "./NavBar.css";
 import { Link } from "react-router-dom";
 
 const NavBar = () => {
-
   return (
-    <nav>
+    <nav className="nav-bar-container">
       <div id="nav-website-name">
-        <h1>Gaming <span><img
-            src={Logo}
-            alt="Gaming Corner Logo"
-            className="navigation-bar-logo-image"/>
-            </span> Corner</h1>
+        <h1 id="website-header">
+          Gaming
+          {" "} <span>
+            <img
+              src={Logo}
+              alt="Gaming Corner Logo"
+              className="navigation-bar-logo-image"
+            />
+          </span>{" "}
+          Corner
+        </h1>
       </div>
       <div id="nav-links-container">
         <ul id="nav-links">
           <Link to="/home">
-            <li>Home</li>
+            <li className="nav-link-anchor">Home</li>
           </Link>
           <Link to="/profile">
             <li>Profile</li>
@@ -27,7 +32,6 @@ const NavBar = () => {
           </Link>
         </ul>
       </div>
-
     </nav>
   );
 };
