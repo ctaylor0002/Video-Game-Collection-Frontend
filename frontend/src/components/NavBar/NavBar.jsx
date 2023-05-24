@@ -7,16 +7,15 @@ const NavBar = () => {
 
   return (
     <nav>
-      <div id="logo">
-        <img
-          src={Logo}
-          alt="Gaming Corner Logo"
-          className="navigation-bar-logo-image"
-        />
+      <div id="nav-website-name">
+        <h1>Gaming <span><img
+            src={Logo}
+            alt="Gaming Corner Logo"
+            className="navigation-bar-logo-image"/>
+            </span> Corner</h1>
       </div>
-      <div id="nav-links">
-        <h1>Gaming Corner</h1>
-        <ul>
+      <div id="nav-links-container">
+        <ul id="nav-links">
           <Link to="/home">
             <li>Home</li>
           </Link>
@@ -28,9 +27,7 @@ const NavBar = () => {
           </Link>
         </ul>
       </div>
-      <div>
-        {/* for flex purposes */}
-      </div>
+
     </nav>
   );
 };
