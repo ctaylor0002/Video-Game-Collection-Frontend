@@ -1,34 +1,9 @@
 import React, { useState, useEffect } from "react";
-import useAuth from "./../../hooks/useAuth";
 import Logo from "../../assets/Logo.png";
 import "./NavBar.css";
-import axios from "axios";
 import { Link } from "react-router-dom";
-// import ProfilePic from '../../assets/base_profile_picture.jpg'
 
 const NavBar = () => {
-  const [ProfilePic, setProfilePic] = useState("");
-  const [ProfileDec, setProfileDesc] = useState("");
-  const [user, token] = useAuth();
-
-  useEffect(() => {
-    getProfileInfo();
-  }, []);
-
-  const getProfileInfo = async (event) => {
-    // event.preventDefault();
-    console.log(user);
-    const response = await axios.get(
-      `http://127.0.0.1:8000/api/profile/${user.id}/`
-    );
-    let pictureData = `http://127.0.0.1:8000${response.data.profile_picture}`;
-    setProfilePic(pictureData);
-    console.log(response.data.profile_picture);
-    //setProfilePic(response.data.profile_pic)
-
-    console.log(ProfilePic);
-    console.log(response);
-  };
 
   return (
     <nav>
