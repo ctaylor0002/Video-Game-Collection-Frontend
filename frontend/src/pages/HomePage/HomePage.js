@@ -147,7 +147,9 @@ const HomePage = (props) => {
           />
         <h2 id="user-username">Welcome, {user.username}</h2>
       </div>
-      <div className="container-search">
+
+      {/* This will be moved to search for more information rather than just users */}
+      {/* <div className="container-search">
         <DropdownList
           defaultValue={""}
           data={usernames}
@@ -156,8 +158,8 @@ const HomePage = (props) => {
           onChange={(event) => setSearchValue(event)}
         />
         {linkLocation()}
-        {/* Add an if statement that if the searchValue equals the user.username Link to the profilepage of the user */}
-      </div>
+        Add an if statement that if the searchValue equals the user.username Link to the profilepage of the user
+      </div> */}
       <div className="container-posts">
         {posts &&
           posts.map((post) => (
