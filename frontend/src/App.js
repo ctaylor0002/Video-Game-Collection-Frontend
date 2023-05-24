@@ -109,14 +109,6 @@ function App() {
       <div id="main-parent">
         <Navbar />
         <div id="page-body">
-          <div className="nav-user">
-            <img
-          src={`http://127.0.0.1:8000${profilePic.contents.profile_picture}`}
-          className="navigation-bar-locations-user-profile-picture"
-        />
-            <h2>Welcome, {user.username}</h2>
-            {/* <h2>Welcome, loggedInUser</h2> */}
-          </div>
           <Routes>
             <Route
               path="/"

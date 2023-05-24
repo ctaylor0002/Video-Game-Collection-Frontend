@@ -1,12 +1,26 @@
-/* .container {
-    margin-top: 80px;
-    background-color: black;
-    margin-left: auto;
-    margin-right: auto;
-} */
+.user-profile-picture {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+#user-information {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#user-username {
+    padding-top: 10px;
+}
+
 body {
     background-color: rgb(160, 160, 160);
     margin-top: 80px;
+}
+
+.page-body-container {
+    padding: 50px 0px;
 }
 
 .container-post {
@@ -21,7 +35,6 @@ body {
     box-shadow: 1px 4px 6px 2px grey;
     background-color: #817f7f;
     width: 50%;
-    /* animation: loadIn 1s; */
 }
 
 .container-posts {
@@ -56,9 +69,7 @@ body {
 
 .container-search {
     display: flex;
-    justify-content: flex-end;
-    width: 300px;
-    margin-left: 75%;
+    justify-content: center;
 }
 
 .rw-dropdown-list {
