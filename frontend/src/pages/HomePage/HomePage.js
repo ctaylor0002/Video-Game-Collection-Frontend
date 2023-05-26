@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 
 // Recoil Imports
 import { RecoilRoot, useRecoilValueLoadable } from "recoil";
-import { profilePicState, fetchProfilePic } from "../../recoilState.js";
+import { profilePicState, fetchProfilePic, fetchUserData } from "../../recoilState.js";
 
 const HomePage = (props) => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
@@ -24,7 +24,10 @@ const HomePage = (props) => {
   const [usernames, setUsernames] = useState([]);
   const [searchValue, setSearchValue] = useState("");
 
-  const profilePic = useRecoilValueLoadable(fetchProfilePic(user.id));
+  // const profilePic = useRecoilValueLoadable(fetchProfilePic(user.id));
+  // console.log(profilePic)
+
+  const profilePic = useRecoilValueLoadable(fetchUserData(user.username));
   console.log(profilePic)
 
   useEffect(() => {
