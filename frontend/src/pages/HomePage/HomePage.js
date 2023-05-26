@@ -12,7 +12,8 @@ import { Link } from "react-router-dom";
 
 // Recoil Imports
 import { RecoilRoot, useRecoilValueLoadable } from "recoil";
-import { profilePicState, fetchProfilePic, fetchUserData } from "../../recoilState.js";
+import { profilePicState, fetchUserData } from "../../recoilState.js";
+import Post from "../../components/Post/Post";
 
 const HomePage = (props) => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
@@ -59,7 +60,7 @@ const HomePage = (props) => {
       let response = await axios.get(
         `http://127.0.0.1:8000/api/posts/${user.id}/`
       );
-      //console.log(response)
+      console.log(response.data)
       setPosts(response.data);
       startUp();
     } catch (error) {
@@ -165,36 +166,8 @@ const HomePage = (props) => {
       </div> */}
       <div className="container-posts">
         {posts &&
-          posts.map((post) => (
-            <div className="hidden container-post" key={post.id}>
-              {console.log(post)}
-              <div className="container-post-user">
-                <h3 key={post.id}>{post.user.username}</h3>
-              </div>
-              <div className="container-post-content">
-                <p key={post.id}>{post.post_content}</p>
-              </div>
-              <div className="container-post-likes-dislikes">
-                <div className="container-post-likes-count">
-                  <p key={post.id}>Likes: {post.likes}</p>
-                  <LikeButton
-                    className={"jump-shake"}
-                    id={post.id}
-                    type={"like"}
-                    likeOrDislikePost={likeOrDislikePost}
-                  />
-                </div>
-                <div className="container-post-dislikes-count">
-                  <p key={post.id}>Dislikes: {post.dislikes}</p>
-                  <DislikeButton
-                    className={"jump-shake"}
-                    id={post.id}
-                    type={"dislike"}
-                    likeOrDislikePost={likeOrDislikePost}
-                  />
-                </div>
-              </div>
-            </div>
+          posts.map((post) => ( 
+            <Post post={post} />
           ))}
       </div>
     </div>

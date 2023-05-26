@@ -2,7 +2,7 @@
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import { RecoilRoot, useRecoilValueLoadable } from "recoil";
-import { profilePicState, fetchProfilePic } from "./recoilState";
+import { userDataState, fetchUserData } from "./recoilState";
 
 // Pages Imports
 import HomePage from "./pages/HomePage/HomePage";
@@ -26,7 +26,7 @@ import useAuth from "./hooks/useAuth";
 function App() {
   
   const [user, token] = useAuth();
-  const profilePic = useRecoilValueLoadable(fetchProfilePic(user.id));
+  const profilePic = useRecoilValueLoadable(fetchUserData(user.id));
   console.log(profilePic)
   // useEffect(()=>{
   //   console.log('changing state', profilePic.state)

@@ -4,11 +4,11 @@
   align-items: center;
 }
 
-a {
+/* a {
   transition: 1s;
   color: white;
   text-decoration: none;
-}
+} */
 
 a:hover {
   /* font-size: 18px; */
