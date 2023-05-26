@@ -7,6 +7,13 @@
   color: white;
 }
 
+.navigation-bar-logo-image {
+  width: 40px;
+}
+
+.like-or-dislike-count {
+  margin-bottom: 0;
+}
 
 #nav-website-name {
   padding: 25px 0px;

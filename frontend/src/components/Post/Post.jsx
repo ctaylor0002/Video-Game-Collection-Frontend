@@ -32,7 +32,7 @@ const Post = (post) => {
                     type={"like"}
                     // likeOrDislikePost={likeOrDislikePost}
                   />
-                  <p key={currentpost.id}>{currentpost.likes}</p>
+                  <p className="like-or-dislike-count" key={currentpost.id}>{currentpost.likes}</p>
                 </div>
                 <div className="container-post-dislikes-count">
                   <DislikeButton
@@ -41,7 +41,7 @@ const Post = (post) => {
                     type={"dislike"}
                     // likeOrDislikePost={likeOrDislikePost}
                   />
-                  <p key={currentpost.id}>{currentpost.dislikes}</p>
+                  <p className="like-or-dislike-count" key={currentpost.id}>{currentpost.dislikes}</p>
                 </div>
               </div>
             </div>
