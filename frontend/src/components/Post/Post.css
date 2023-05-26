@@ -1,3 +1,10 @@
+.container-post {
+    border: solid rgba(0,0,0,.1);
+    border-width: 1px 1px .5px;
+    width: 100%;
+    padding: 25px;
+    /* margin-bottom: -2px; */
+}
 
 .container-post-user {
     display: flex;
@@ -76,18 +83,14 @@
 }
 
 @media screen and (min-width: 768px){
-    .container-post {
+    .container-posts {
         display: flex;
         flex-direction: column;
-        flex-wrap: wrap;
-        border: 3px;
-        border-style: solid;
-        margin-top: 10px;
-        border-radius: 10px;
-        padding: 5px;
-        box-shadow: 1px 4px 6px 2px grey;
-        background-color: #817f7f;
-        width: 50%;
+        align-items: center;
+    }
+
+    .container-post {
+        width: 50%; 
     }
   }
 

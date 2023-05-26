@@ -15,9 +15,9 @@ const Post = (post) => {
 
 
               <div className="container-post-user">
-                <img className='container-post-user-image' src={`http://127.0.0.1:8000${currentpost.user.profile_picture}/`} />
+                <Link to={`/${currentpost.user.username}/`}><img className='container-post-user-image' src={`http://127.0.0.1:8000${currentpost.user.profile_picture}/`} /></Link>
                 <div className='container-post-user-details'>
-                    <Link to={`/profile/${currentpost.user.username}/`}><a id='username-tag'className='username' key={post.id}>{currentpost.user.display_name}</a></Link>
+                    <Link to={`/${currentpost.user.username}/`}><h3 id='username-tag'className='username' key={post.id}>{currentpost.user.display_name}</h3></Link>
                     <h3 id='user-tag' className='username' key={post.id}>@{currentpost.user.username}</h3>
                 </div>
               </div>
@@ -26,22 +26,22 @@ const Post = (post) => {
               </div>
               <div className="container-post-likes-dislikes">
                 <div className="container-post-likes-count">
-                  <p key={currentpost.id}>Likes: {currentpost.likes}</p>
                   <LikeButton
                     className={"jump-shake"}
                     id={currentpost.id}
                     type={"like"}
                     // likeOrDislikePost={likeOrDislikePost}
                   />
+                  <p key={currentpost.id}>{currentpost.likes}</p>
                 </div>
                 <div className="container-post-dislikes-count">
-                  <p key={currentpost.id}>Dislikes: {currentpost.dislikes}</p>
                   <DislikeButton
                     className={"jump-shake"}
                     id={currentpost.id}
                     type={"dislike"}
                     // likeOrDislikePost={likeOrDislikePost}
                   />
+                  <p key={currentpost.id}>{currentpost.dislikes}</p>
                 </div>
               </div>
             </div>
