@@ -22,7 +22,7 @@ const Post = (post) => {
                 </div>
               </div>
               <div className="container-post-content">
-                <p key={post.id}>{currentpost.post_content}</p>
+                <p className='post-content' key={post.id}>{currentpost.post_content}</p>
               </div>
               <div className="container-post-likes-dislikes">
                 <div className="container-post-likes-count">

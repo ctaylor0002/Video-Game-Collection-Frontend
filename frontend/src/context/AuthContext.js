@@ -15,6 +15,9 @@ function setUserObject(user) {
     username: user.username,
     id: user.user_id,
     first_name: user.first_name,
+    display_name: user.display_name,
+    profile_picture: user.profile_picture,
+    profile_description: user.profile_description,
   };
 }
 

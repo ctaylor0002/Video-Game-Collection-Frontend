@@ -35,6 +35,7 @@ const HomePage = (props) => {
     fetchNewPosts();
     getUsers();
     console.log(posts);
+    console.log(user.profile_picture)
   }, []);
 
   async function getUsers() {
@@ -101,7 +102,7 @@ const HomePage = (props) => {
   function startUp() {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        console.log(entry);
+        // console.log(entry);
         if (entry.isIntersecting) {
           entry.target.classList.add("show");
         } else {
@@ -146,10 +147,10 @@ const HomePage = (props) => {
     <div className="page-body-container">
       <div id="user-information">
         <img
-          src={`http://127.0.0.1:8000${profilePic.contents.profile_picture}`}
+          src={`http://127.0.0.1:8000/images/${user.profile_picture}`}
           className="user-profile-picture"
           />
-        <h2 id="user-username">Welcome, {user.username}</h2>
+        <h2 id="user-username">Welcome, {user.display_name}</h2>
       </div>
 
       {/* This will be moved to search for more information rather than just users */}
