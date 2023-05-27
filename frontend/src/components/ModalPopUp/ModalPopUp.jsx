@@ -24,14 +24,14 @@ const ModalPopUp = (props) => {
   return (
     <div>
       <div className="modal-background">
-        {/* <div className="modal-container"> */}
-          {/* <div className='modal-header'>
+        <div className="modal-container"> 
+          <div className='modal-header'> 
                     <input placeholder='Search For Game' onChange={(event) => setSearchTerm(event.target.value)} />
                     <button onClick={((event) => openModalPopUp())}>More Games?</button>
                     <button onClick={() => props.closeModal(false)}>X</button>
-                </div> */}
-          {/* <div className='modal-table'> */}
-          {/* <table className='table table-dark'>
+                </div> 
+          <div className='modal-table'>
+          <table className='table table-dark'>
                         <tbody>
                             {props.gameList &&
                             props.gameList.filter((videoGame) => {
@@ -54,9 +54,9 @@ const ModalPopUp = (props) => {
                                 
                             })}
                         </tbody>
-                    </table> */}
-          {/* </div> */}
-        {/* </div> */}
+                    </table>
+          </div>
+        </div> 
       </div>
       <div className="search-game">
         {openModal && (

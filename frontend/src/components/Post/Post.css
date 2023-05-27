@@ -83,6 +83,27 @@
     text-underline-offset: 2px; 
 }
 
+.hover-container {
+    position: relative;
+}
+
+.hover-container:hover .profile-hoverable {
+    display: block;
+    width: 200px;
+    height: 200px;
+    z-index: 1;
+}
+
+.hover-component {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
 @media screen and (min-width: 768px){
     .container-posts {
         display: flex;

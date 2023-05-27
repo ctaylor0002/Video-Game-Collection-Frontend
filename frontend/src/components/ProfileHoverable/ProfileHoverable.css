@@ -1,0 +1,94 @@
+/* .hover-container {
+    position: relative;
+}
+
+.hover.container:hover .profile-hoverable {
+    display: block;
+}
+
+.hover-component {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+} */
+
+.modal-background-test {
+    /* z-index: 999; */
+    width: 300px;
+    height: 150px;
+    background-color: white;
+    border: 1px solid black;
+    position: fixed;
+    display: flex;
+    /* left: 50px; */
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    position: absolute;
+    transition: 1s;
+}
+
+.profile-image {
+    top: 0;
+    left: 0;
+    margin: 10px 0 0 10px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.modal-top-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    top: 0;
+    position: absolute;
+}
+
+.user-data {
+    font-size: 12px;
+    
+}
+
+.modal-bottom {
+    width: 100%;
+}
+
+.user-description {
+    display: flex;
+    justify-content: left;
+}
+
+/* 
+.profile-hoverable {
+    z-index: 3;
+    width: 200px;
+    height: 150px;
+    background-color: white;
+    border: 1px solid black;
+    position: fixed;
+    display: flex;
+    top: 0;
+    left: 50px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    z-index: 2;
+    position: absolute;
+    box-shadow: 0 0 2px 2px grey;
+    width: 10%;
+    height: 550px;
+    border-color: black;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0,0,0,.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    overflow-y: scroll;
+} */
