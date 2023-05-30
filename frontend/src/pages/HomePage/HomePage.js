@@ -23,19 +23,13 @@ const HomePage = (props) => {
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
   const [usernames, setUsernames] = useState([]);
-  const [searchValue, setSearchValue] = useState("");
-
-  // const profilePic = useRecoilValueLoadable(fetchProfilePic(user.id));
-  // console.log(profilePic)
+  // const [searchValue, setSearchValue] = useState("");
 
   const profilePic = useRecoilValueLoadable(fetchUserData(user.username));
-  console.log(profilePic)
 
   useEffect(() => {
     fetchNewPosts();
     getUsers();
-    console.log(posts);
-    console.log(user.profile_picture)
   }, []);
 
   async function getUsers() {
@@ -69,37 +63,8 @@ const HomePage = (props) => {
     }
   };
 
-  async function likeOrDislikePost(id, type, data) {
-    try {
-      let followingResponse = await axios.patch(
-        `http://127.0.0.1:8000/api/posts/type/${id}?type=${type}&value=${data}`,
-        { type: data },
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
-      getRecentPosts();
-    } catch (error) {
-      console.log(error.response.data);
-    }
-  }
-
-  async function getRecentPosts() {
-    try {
-      let postsResponse = await axios.get(
-        `http://127.0.0.1:8000/api/posts/${user.id}/`
-      );
-
-      let tempPostsResponse = postsResponse.data;
-      setPosts(tempPostsResponse);
-    } catch (error) {
-      console.log(error.response.data);
-    }
-  }
-
   function startUp() {
+    // console.log(token)
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         // console.log(entry);
@@ -113,34 +78,6 @@ const HomePage = (props) => {
 
     const hiddenElements = document.querySelectorAll(".hidden");
     hiddenElements.forEach((el) => observer.observe(el));
-  }
-
-  function linkLocation() {
-    if (searchValue == user.username) {
-      return (
-        <Link
-          to={`/profile`}
-          userValue={searchValue}
-          setFollowing={props.setFollowing}
-          following={props.following}
-          followers={props.followers}
-          followingPosts={props.followingPosts}
-        >
-          <button>Search</button>
-        </Link>
-      );
-    } else {
-      return (
-        <Link
-          to={`/${searchValue}`}
-          userValue={searchValue}
-          setFollowing={props.setFollowing}
-          following={props.following}
-        >
-          <button>Search</button>
-        </Link>
-      );
-    }
   }
 
   return (
@@ -168,7 +105,7 @@ const HomePage = (props) => {
       <div className="container-posts">
         {posts &&
           posts.map((post) => ( 
-            <Post post={post} />
+            <Post post={post} getRecentPosts={getRecentPosts} />
           ))}
       </div>
     </div>

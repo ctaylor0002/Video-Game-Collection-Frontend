@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import useAuth from '../../hooks/useAuth';
 
 import LikeButton from '../Buttons/LikeButton/LikeButton';
 import DislikeButton from '../Buttons/DislikeButton/DislikeButton';
@@ -7,6 +8,10 @@ import ProfileHoverable from '../ProfileHoverable/ProfileHoverable';
 import { Link } from "react-router-dom";
 
 import './Post.css'
+
+import axios from 'axios';
+
+
 
 function getPostTime(postTime) {
     const postDate = new Date(postTime)
@@ -19,7 +24,6 @@ function getPostTime(postTime) {
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-    console.log(days, hours, minutes, seconds)
     if (days != 0) {
         return (days + 'd');
     }
@@ -35,7 +39,37 @@ function getPostTime(postTime) {
 
 }
 
+
+
 const Post = (post) => {
+  let currentpost = post.post;
+
+  const [user, token] = useAuth();
+  const [likeCount, setLikeCount] = useState(currentpost.likes);
+  const [dislikeCount, setDislikeCount] = useState(currentpost.dislikes);
+
+  async function likeOrDislikePost(id, type, data) {
+    try {
+      let followingResponse = await axios.patch(
+        `http://127.0.0.1:8000/api/posts/type/${id}?type=${type}&value=${data}`,
+        { type: data },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+
+      if (type == 'like') {
+        setLikeCount(likeCount + data);
+      } else {
+        setDislikeCount(dislikeCount + data);
+      }
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  }
+
     const [hoverableProfile, setHoverableProfile] = useState(false);
 
     const handleMouseOver = () => {
@@ -48,7 +82,7 @@ const Post = (post) => {
         console.log('Not Hovering')
     }
 
-    let currentpost = post.post;
+
 
     return ( 
         <div className="hidden container-post" key={currentpost.id}>
@@ -80,18 +114,18 @@ const Post = (post) => {
                     className={"jump-shake"}
                     id={currentpost.id}
                     type={"like"}
-                    // likeOrDislikePost={likeOrDislikePost}
+                    likeOrDislikePost={likeOrDislikePost}
                   />
-                  <p className="like-or-dislike-count" key={currentpost.id}>{currentpost.likes}</p>
+                  <p className="like-or-dislike-count" key={currentpost.id}>{likeCount}</p>
                 </div>
                 <div className="container-post-dislikes-count">
                   <DislikeButton
                     className={"jump-shake"}
                     id={currentpost.id}
                     type={"dislike"}
-                    // likeOrDislikePost={likeOrDislikePost}
+                    likeOrDislikePost={likeOrDislikePost}
                   />
-                  <p className="like-or-dislike-count" key={currentpost.id}>{currentpost.dislikes}</p>
+                  <p className="like-or-dislike-count" key={currentpost.id}>{dislikeCount}</p>
                 </div>
               </div>
             </div>

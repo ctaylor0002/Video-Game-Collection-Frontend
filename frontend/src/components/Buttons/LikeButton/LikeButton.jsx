@@ -11,6 +11,7 @@ const LikeButton = (props) => {
    
 
     function likeButtonCall() {
+        console.log(props)
         console.log(likeValue)
         if (likeValue == 0) {
             try {

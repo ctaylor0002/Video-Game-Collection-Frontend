@@ -189,9 +189,9 @@ const ProfilePage = (props) => {
    
     return ( 
         <div className='profile-container'>
-            <FollowingPosts  posts={posts} likeOrDislikePost={likeOrDislikePost} setFollowing={props.setFollowing} />
+            {/* <FollowingPosts  posts={posts} likeOrDislikePost={likeOrDislikePost} setFollowing={props.setFollowing} />
             <MyPosts userPosts={userPosts} deletePost={deletePost} createPost={createPost}/>
-            <UserTable followers={followers} following={following} profilePic={profilePic} profile={profile} updateProfile={updateProfile}/>
+            <UserTable followers={followers} following={following} profilePic={profilePic} profile={profile} updateProfile={updateProfile}/> */}
 
             {/* <div className='profile-contatiner-posts'>
                 <div className='profile-contatiner-create-post'>

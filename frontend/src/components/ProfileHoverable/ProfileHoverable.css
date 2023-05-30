@@ -19,7 +19,7 @@
 .modal-background-test {
     /* z-index: 999; */
     width: 300px;
-    height: 150px;
+    height: 125px;
     background-color: white;
     border: 1px solid black;
     position: fixed;
@@ -29,7 +29,7 @@
     align-items: center;
     border-radius: 10px;
     position: absolute;
-    transition: 1s;
+    animation: fade-in .3s;
 }
 
 .profile-image {
@@ -57,11 +57,20 @@
 
 .modal-bottom {
     width: 100%;
+    background-color: white;
 }
 
 .user-description {
     display: flex;
     justify-content: left;
+}
+
+@keyframes fade-in {
+    0% { opacity: 0%; }
+    /* 25% { opacity: 0%; } */
+    50% { opacity: 50%; }
+    /* 75% { opacity: 75%; } */
+    100% { opacity: 100%; }
 }
 
 /* 
