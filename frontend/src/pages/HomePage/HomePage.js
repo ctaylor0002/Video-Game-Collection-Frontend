@@ -105,7 +105,7 @@ const HomePage = (props) => {
       <div className="container-posts">
         {posts &&
           posts.map((post) => ( 
-            <Post post={post} getRecentPosts={getRecentPosts} />
+            <Post post={post} />
           ))}
       </div>
     </div>
