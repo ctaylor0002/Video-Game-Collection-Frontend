@@ -113,6 +113,12 @@
 
     .container-post {
         width: 50%; 
+
+    }
+
+    .container-post:hover {
+        background-color: rgb(251, 251, 251);
+
     }
   }
 

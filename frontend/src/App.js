@@ -27,7 +27,7 @@ function App() {
   
   const [user, token] = useAuth();
   const profilePic = useRecoilValueLoadable(fetchUserData(user.id));
-  console.log(profilePic)
+  // console.log(profilePic)
   // useEffect(()=>{
   //   console.log('changing state', profilePic.state)
   // },[profilePic.state])

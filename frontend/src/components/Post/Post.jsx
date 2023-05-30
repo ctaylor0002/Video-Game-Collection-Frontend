@@ -47,6 +47,7 @@ const Post = (post) => {
   const [user, token] = useAuth();
   const [likeCount, setLikeCount] = useState(currentpost.likes);
   const [dislikeCount, setDislikeCount] = useState(currentpost.dislikes);
+  const [hoverableProfile, setHoverableProfile] = useState(false);
 
   async function likeOrDislikePost(id, type, data) {
     try {
@@ -70,24 +71,20 @@ const Post = (post) => {
     }
   }
 
-    const [hoverableProfile, setHoverableProfile] = useState(false);
-
     const handleMouseOver = () => {
         setHoverableProfile(true);
-        console.log('Hovering')
+        // console.log('Hovering')
     }
 
     const handleMouseOut = () => {
         setHoverableProfile(false);
-        console.log('Not Hovering')
+        // console.log('Not Hovering')
     }
 
 
 
     return ( 
         <div className="hidden container-post" key={currentpost.id}>
-
-
               <div className="container-post-user">
                 <div className='hover-container' > 
                     <Link to={`/${currentpost.user.username}/`}><img className='container-post-user-image' src={`http://127.0.0.1:8000${currentpost.user.profile_picture}/`} /></Link>

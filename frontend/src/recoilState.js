@@ -17,7 +17,7 @@ export const fetchUserData = selectorFamily({
   get: (username) => async ({get}) => {
     const response = await fetch(`http://127.0.0.1:8000/api/auth/${username}/`);
     const data = await response.json();
-    console.log(" DATA HERE", data[0]);
+    // console.log(" DATA HERE", data[0]);
     return data[0];
   }
 })

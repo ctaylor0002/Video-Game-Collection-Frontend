@@ -37,7 +37,7 @@ const HomePage = (props) => {
       let usersResponse = await axios.get(
         "http://127.0.0.1:8000/api/auth/users/"
       );
-      console.log(usersResponse);
+      // console.log(usersResponse);
       setUsers(usersResponse.data);
 
       let usernames = usersResponse.data.map((ourUser) => {
@@ -55,7 +55,7 @@ const HomePage = (props) => {
       let response = await axios.get(
         `http://127.0.0.1:8000/api/posts/${user.id}/`
       );
-      console.log(response.data)
+      // console.log(response.data)
       setPosts(response.data);
       startUp();
     } catch (error) {
