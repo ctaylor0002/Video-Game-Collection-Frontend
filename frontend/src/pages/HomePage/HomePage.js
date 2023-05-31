@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import AuthContext from "../../context/AuthContext";
 
 import axios from "axios";
 import "../HomePage/HomePage.css";
@@ -8,7 +9,7 @@ import LikeButton from "../../components/Buttons/LikeButton/LikeButton";
 import DislikeButton from "../../components/Buttons/DislikeButton/DislikeButton";
 import "react-widgets/styles.css";
 import { DropdownList } from "react-widgets";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // Recoil Imports
 import { RecoilRoot, useRecoilValueLoadable } from "recoil";
@@ -23,6 +24,7 @@ const HomePage = (props) => {
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
   const [usernames, setUsernames] = useState([]);
+  const navigate = useNavigate();
   // const [searchValue, setSearchValue] = useState("");
 
   const profilePic = useRecoilValueLoadable(fetchUserData(user.username));

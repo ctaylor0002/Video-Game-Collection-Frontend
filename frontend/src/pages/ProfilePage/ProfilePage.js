@@ -6,6 +6,12 @@ import UserTable from '../../components/UserTable/UserTable';
 import MyPosts from '../../components/MyPosts/MyPosts';
 import FollowingPosts from '../../components/FollowingPosts/FollowingPosts';
 
+import Post from '../../components/Post/Post';
+
+// Recoil Imports
+// import { RecoilRoot, useRecoilValueLoadable } from "recoil";
+// import { profilePicState, fetchUserData } from "../../recoilState.js";
+
 
 const ProfilePage = (props) => {
    
@@ -14,7 +20,7 @@ const ProfilePage = (props) => {
     const [userPosts, setUserPosts] = useState([]);
     const [followers, setFollowers] = useState([]);
     const [following, setFollowing] = useState([]);
-    const [profilePic, setProfilePic] = useState("");
+    // const [profilePic, setProfilePic] = useState("");
     const [profile, setProfile] = useState("");
   
     // Here I think I will show there picture with an option to change it
@@ -23,11 +29,14 @@ const ProfilePage = (props) => {
    
     useEffect(() => {
 
-        getRecentPosts();
+        // getRecentPosts();
         getUserPosts();
         getFollowers();
         getFollowing();
-        getProfileInfo();
+        startUp();
+        // getProfileInfo();
+
+
         // getFollowingPosts();
         // fetchNewPosts();
         // fetchFollowers();
@@ -35,44 +44,44 @@ const ProfilePage = (props) => {
       }, [])
       
 
-        async function getRecentPosts() {
-            try {
-                let postsResponse = await axios.get(`http://127.0.0.1:8000/api/posts/${user.id}/`);
+        // async function getRecentPosts() {
+        //     try {
+        //         let postsResponse = await axios.get(`http://127.0.0.1:8000/api/posts/${user.id}/`);
 
 
-                let followingResponse = await axios.get(`http://127.0.0.1:8000/api/followers/`, {
-                    headers: {
-                        Authorization : "Bearer " + token,
-                    },
-                });
-                let tempPostsResponse = postsResponse.data;
-                let testPosts = [];
+        //         let followingResponse = await axios.get(`http://127.0.0.1:8000/api/followers/`, {
+        //             headers: {
+        //                 Authorization : "Bearer " + token,
+        //             },
+        //         });
+        //         let tempPostsResponse = postsResponse.data;
+        //         let testPosts = [];
 
 
 
-                for(let i = 0; i < followingResponse.data.length; i++) {
+        //         for(let i = 0; i < followingResponse.data.length; i++) {
 
-                    let tempFollowingPosts = tempPostsResponse.filter(function(el) {
-                        console.log(followingResponse.data[i].follower_user.id)
-                        console.log(el.user.id)
-                        return el.user.id === followingResponse.data[i].follower_user.id
-                    });   
-                    testPosts = testPosts.concat(tempFollowingPosts);
+        //             let tempFollowingPosts = tempPostsResponse.filter(function(el) {
+        //                 console.log(followingResponse.data[i].follower_user.id)
+        //                 console.log(el.user.id)
+        //                 return el.user.id === followingResponse.data[i].follower_user.id
+        //             });   
+        //             testPosts = testPosts.concat(tempFollowingPosts);
                     
 
                    
-                }
-                console.log(testPosts)
-                testPosts = testPosts.filter(function(el) {
-                    console.log(el.user.id)
-                    console.log(user.id)
-                    return el.user.id != user.id
-                });
-                setPosts(testPosts)
-            } catch (error) {
-                console.log(error.response.data);
-            }
-        }
+        //         }
+        //         console.log(testPosts)
+        //         testPosts = testPosts.filter(function(el) {
+        //             console.log(el.user.id)
+        //             console.log(user.id)
+        //             return el.user.id != user.id
+        //         });
+        //         setPosts(testPosts)
+        //     } catch (error) {
+        //         console.log(error.response.data);
+        //     }
+        // }
 
         async function deletePost(id) {
             console.log(id)
@@ -136,18 +145,18 @@ const ProfilePage = (props) => {
             console.log(posts)
         }
 
-        async function likeOrDislikePost(id, type, data) {
-            try {
-                let followingResponse = await axios.patch(`http://127.0.0.1:8000/api/posts/type/${id}?type=${type}&value=${data}`, { type : data}, {
-                    headers: {
-                        Authorization : "Bearer " + token,
-                    },
-                });
-                getRecentPosts();
-            } catch (error) {
-                console.log(error.response.data);
-            }
-        }
+        // async function likeOrDislikePost(id, type, data) {
+        //     try {
+        //         let followingResponse = await axios.patch(`http://127.0.0.1:8000/api/posts/type/${id}?type=${type}&value=${data}`, { type : data}, {
+        //             headers: {
+        //                 Authorization : "Bearer " + token,
+        //             },
+        //         });
+        //         getRecentPosts();
+        //     } catch (error) {
+        //         console.log(error.response.data);
+        //     }
+        // }
 
         async function createPost(data) {
             console.log(data)
@@ -165,30 +174,96 @@ const ProfilePage = (props) => {
             }
         }
 
-        async function getProfileInfo() {
-            console.log(user)
-            const response = await axios.get(`http://127.0.0.1:8000/api/profile/${user.id}/`)
-            let pictureData = `http://127.0.0.1:8000${response.data.profile_picture}`
-            setProfilePic(pictureData);
-            setProfile(response.data);
-        }
-
-        async function updateProfile(data) {
-            console.log(data)
-            
-           const response = await axios.patch(`http://127.0.0.1:8000/api/profile/update/${user.id}/`, data, {
-                    headers: {
-                        Authorization : "Bearer " + token,
-                        'Content-Type' : "multipart/form-data",
-                    },
+        function startUp() {
+            // console.log(token)
+            const observer = new IntersectionObserver((entries) => {
+              entries.forEach((entry) => {
+                // console.log(entry);
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("show");
+                } else {
+                  entry.target.classList.remove("show");
+                }
+              });
             });
-            setProfilePic(response.data.profile_picture);
-            console.log(response);
-        }
+        
+            const hiddenElements = document.querySelectorAll(".hidden");
+            hiddenElements.forEach((el) => observer.observe(el));
+          }
+
+        // async function getProfileInfo() {
+        //     console.log(user)
+        //     const response = await axios.get(`http://127.0.0.1:8000/api/profile/${user.id}/`)
+        //     let pictureData = `http://127.0.0.1:8000${response.data.profile_picture}`
+        //     setProfilePic(pictureData);
+        //     setProfile(response.data);
+        // }
+
+        // async function updateProfile(data) {
+        //     console.log(data)
+            
+        //    const response = await axios.patch(`http://127.0.0.1:8000/api/profile/update/${user.id}/`, data, {
+        //             headers: {
+        //                 Authorization : "Bearer " + token,
+        //                 'Content-Type' : "multipart/form-data",
+        //             },
+        //     });
+        //     setProfilePic(response.data.profile_picture);
+        //     console.log(response);
+        // }
     
-   
+    // const profileData = useRecoilValueLoadable(fetchUserData(user.username));
+    // console.log(profileData.contents)
+
     return ( 
         <div className='profile-container'>
+            <header id='profile'>
+                <div>
+                    <img src={`http://127.0.0.1:8000/images/${user.profile_picture}`} className='profile-picture' />
+                </div>
+                <div className='profile-details-container'>
+                    <h2 className='user-name'>{user.username}</h2>
+                    <a>Edit Profile</a>
+                </div>
+
+                {/* <div id='profile-image'>
+                    <img src={`http://127.0.0.1:8000/images/${user.profile_picture}`} className='profile-picture' />
+                </div>
+                <div className='profile-container'>
+                    <div id='profile-details'>
+                        <h2 className='user-name'>{user.username}</h2>
+                        <a>Edit Profile</a>
+                    </div>
+                    <div className='social-media-details'>
+                        <a>Posts: </a>
+                        <a>Followers: </a>
+                        <a>Following: </a>
+                    </div>
+                </div> */}
+
+            </header>
+            <div className='profile-display'>
+                <div className='display-details'>
+                    <a>{userPosts.length}</a>
+                    <a>Posts</a>
+                </div>
+                <div className='display-details'>
+                    <a>{followers.length}</a>
+                    <a>Followers</a>
+                </div>
+                <div className='display-details'>
+                    <a>{following.length}</a>
+                    <a>Following</a>
+                </div>
+                
+            </div>
+            <div className="container-posts">
+                    {userPosts &&
+                    userPosts.map((post) => ( 
+                    <Post post={post} />
+                    ))}
+            </div>
+
             {/* <FollowingPosts  posts={posts} likeOrDislikePost={likeOrDislikePost} setFollowing={props.setFollowing} />
             <MyPosts userPosts={userPosts} deletePost={deletePost} createPost={createPost}/>
             <UserTable followers={followers} following={following} profilePic={profilePic} profile={profile} updateProfile={updateProfile}/> */}
@@ -230,6 +305,8 @@ const ProfilePage = (props) => {
                 <div className='profile-contatiner-modify-profile'>
             
                 </div>
+
+                
                 
 
             

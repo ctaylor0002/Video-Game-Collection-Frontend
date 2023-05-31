@@ -24,9 +24,8 @@ import React, { useState, useEffect } from "react";
 import useAuth from "./hooks/useAuth";
 
 function App() {
-  
   const [user, token] = useAuth();
-  const profilePic = useRecoilValueLoadable(fetchUserData(user.id));
+  // const profilePic = useRecoilValueLoadable(fetchUserData(user.id));
   // console.log(profilePic)
   // useEffect(()=>{
   //   console.log('changing state', profilePic.state)
