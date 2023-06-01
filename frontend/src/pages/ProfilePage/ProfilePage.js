@@ -5,8 +5,12 @@ import '../ProfilePage/ProfilePage.css'
 import UserTable from '../../components/UserTable/UserTable';
 import MyPosts from '../../components/MyPosts/MyPosts';
 import FollowingPosts from '../../components/FollowingPosts/FollowingPosts';
+import GameTable from '../../components/GameTable/GameTable';
 
 import Post from '../../components/Post/Post';
+
+import PostLogo from '../../assets/Post Logo.png';
+import CollectionLogo from '../../assets/Collection Logo.png'
 
 // Recoil Imports
 // import { RecoilRoot, useRecoilValueLoadable } from "recoil";
@@ -20,6 +24,7 @@ const ProfilePage = (props) => {
     const [userPosts, setUserPosts] = useState([]);
     const [followers, setFollowers] = useState([]);
     const [following, setFollowing] = useState([]);
+    const [buttonState, setButtonState] = useState(true);
     // const [profilePic, setProfilePic] = useState("");
     const [profile, setProfile] = useState("");
   
@@ -30,10 +35,12 @@ const ProfilePage = (props) => {
     useEffect(() => {
 
         // getRecentPosts();
+        // startUp();
         getUserPosts();
+
         getFollowers();
         getFollowing();
-        startUp();
+
         // getProfileInfo();
 
 
@@ -174,22 +181,22 @@ const ProfilePage = (props) => {
             }
         }
 
-        function startUp() {
-            // console.log(token)
-            const observer = new IntersectionObserver((entries) => {
-              entries.forEach((entry) => {
-                // console.log(entry);
-                if (entry.isIntersecting) {
-                  entry.target.classList.add("show");
-                } else {
-                  entry.target.classList.remove("show");
-                }
-              });
-            });
+        // function startUp() {
+        //     // console.log(token)
+        //     const observer = new IntersectionObserver((entries) => {
+        //       entries.forEach((entry) => {
+        //         // console.log(entry);
+        //         if (entry.isIntersecting) {
+        //           entry.target.classList.add("show");
+        //         } else {
+        //           entry.target.classList.remove("show");
+        //         }
+        //       });
+        //     });
         
-            const hiddenElements = document.querySelectorAll(".hidden");
-            hiddenElements.forEach((el) => observer.observe(el));
-          }
+        //     const hiddenElements = document.querySelectorAll(".hidden");
+        //     hiddenElements.forEach((el) => observer.observe(el));
+        //   }
 
         // async function getProfileInfo() {
         //     console.log(user)
@@ -215,6 +222,21 @@ const ProfilePage = (props) => {
     // const profileData = useRecoilValueLoadable(fetchUserData(user.username));
     // console.log(profileData.contents)
 
+    // function getProfileData() {
+    //     let returnData 
+    //     if (buttonState == 0) {
+    //         returnData = userPosts.map((post) => ( <Post post={post} />))
+    //         console.log(returnData)
+    //     } else if (buttonState == 1) {
+    //         returnData = <GameTable />
+    //         console.log(returnData)
+    //     }
+    //     console.log(returnData)
+    //     return(returnData)
+
+    // }
+   
+
     return ( 
         <div className='profile-container'>
             <header id='profile'>
@@ -225,22 +247,6 @@ const ProfilePage = (props) => {
                     <h2 className='user-name'>{user.username}</h2>
                     <a>Edit Profile</a>
                 </div>
-
-                {/* <div id='profile-image'>
-                    <img src={`http://127.0.0.1:8000/images/${user.profile_picture}`} className='profile-picture' />
-                </div>
-                <div className='profile-container'>
-                    <div id='profile-details'>
-                        <h2 className='user-name'>{user.username}</h2>
-                        <a>Edit Profile</a>
-                    </div>
-                    <div className='social-media-details'>
-                        <a>Posts: </a>
-                        <a>Followers: </a>
-                        <a>Following: </a>
-                    </div>
-                </div> */}
-
             </header>
             <div className='profile-display'>
                 <div className='display-details'>
@@ -257,11 +263,15 @@ const ProfilePage = (props) => {
                 </div>
                 
             </div>
+            <div className='profile-buttons'>
+                <img className='profile-button' src={PostLogo} onClick={() => setButtonState(true)}/>
+                <img className='profile-button' src={CollectionLogo} onClick={() => setButtonState(false)} />
+            </div>
+
             <div className="container-posts">
-                    {userPosts &&
-                    userPosts.map((post) => ( 
-                    <Post post={post} />
-                    ))}
+
+                    {buttonState && userPosts.map((post) => ( <Post post={post} />))}
+                    {buttonState ? userPosts.map((post) => ( <Post post={post} />)) : <GameTable />}
             </div>
 
             {/* <FollowingPosts  posts={posts} likeOrDislikePost={likeOrDislikePost} setFollowing={props.setFollowing} />

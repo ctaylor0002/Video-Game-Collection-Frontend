@@ -44,6 +44,16 @@
     margin-top: 10px;
 }
 
+.profile-buttons {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.profile-button {
+    width: 40px;
+    height: 40px;
+}
+
 
 
 .profile-display {

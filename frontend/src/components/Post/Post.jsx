@@ -49,6 +49,10 @@ const Post = (post) => {
   const [dislikeCount, setDislikeCount] = useState(currentpost.dislikes);
   const [hoverableProfile, setHoverableProfile] = useState(false);
 
+  useEffect(() => {
+    startUp();
+  }, [])
+
   async function likeOrDislikePost(id, type, data) {
     try {
       let followingResponse = await axios.patch(
@@ -79,6 +83,23 @@ const Post = (post) => {
     const handleMouseOut = () => {
         setHoverableProfile(false);
         // console.log('Not Hovering')
+    }
+
+    function startUp() {
+      // console.log(token)
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          // console.log(entry);
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          } else {
+            entry.target.classList.remove("show");
+          }
+        });
+      });
+  
+      const hiddenElements = document.querySelectorAll(".hidden");
+      hiddenElements.forEach((el) => observer.observe(el));
     }
 
 
