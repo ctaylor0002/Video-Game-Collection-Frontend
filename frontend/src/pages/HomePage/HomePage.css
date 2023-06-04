@@ -16,57 +16,16 @@
 
 body {
     background-color: rgb(160, 160, 160);
-    margin-top: 80px;
+    /* margin-top: 10px; */
 }
 
 .page-body-container {
-    padding: 50px 0px;
+    padding: 20px 0px;
 }
 
-/* .container-posts {
+.login-logout {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: flex-end;
+    margin-right: 10px;
 }
 
-@media screen and (min-width: 768px){
-    .container-post {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        border: 3px;
-        border-style: solid;
-        margin-top: 10px;
-        border-radius: 10px;
-        padding: 5px;
-        box-shadow: 1px 4px 6px 2px grey;
-        background-color: #817f7f;
-        width: 50%;
-    }
-  }
-
-
-@keyframes jump-shake {
-    0% { transform: translateX(0) }
-    25% { transform: translateY(-9px) }
-    35% { transform: translateY(-9px) rotate(17deg) }
-    55% { transform: translateY(-9px) rotate(-17deg) }
-    65% { transform: translateY(-9px) rotate(17deg) }
-    75% { transform: translateY(-9px) rotate(-17deg) }
-    100% { transform: translateY(0) rotate(0) }
-}
-
-
-@keyframes loadIn {
-    from {
-        opacity: 0;
-        translate: -100%;
-    }
-
-    to {
-        opacity: 1;
-        translate: 50%;
-    }
-}
-
- */
