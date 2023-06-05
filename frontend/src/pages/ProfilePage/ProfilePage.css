@@ -36,6 +36,10 @@
 
 }
 
+.social-table {
+    display: flex;
+}
+
 /* .user-name {
     font-size: 14px;
 } */

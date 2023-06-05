@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useAuth from '../../hooks/useAuth';
 import axios from 'axios';
 import '../ProfilePage/ProfilePage.css'
-import UserTable from '../../components/UserTable/UserTable';
-import MyPosts from '../../components/MyPosts/MyPosts';
-import FollowingPosts from '../../components/FollowingPosts/FollowingPosts';
+
 import GameTable from '../../components/GameTable/GameTable';
 
 import Post from '../../components/Post/Post';
@@ -24,13 +22,10 @@ const ProfilePage = (props) => {
     const [userPosts, setUserPosts] = useState([]);
     const [followers, setFollowers] = useState([]);
     const [following, setFollowing] = useState([]);
-    const [buttonState, setButtonState] = useState(true);
+    const [buttonState, setButtonState] = useState(1);
+    // const [collection, setCollection] = useState([]);
     // const [profilePic, setProfilePic] = useState("");
     const [profile, setProfile] = useState("");
-  
-    // Here I think I will show there picture with an option to change it
-    // Plus I think I will have a followers tab
-    // Plus I think I will have a following tab
    
     useEffect(() => {
 
@@ -41,6 +36,7 @@ const ProfilePage = (props) => {
         getFollowers();
         getFollowing();
 
+
         // getProfileInfo();
 
 
@@ -49,7 +45,24 @@ const ProfilePage = (props) => {
         // fetchFollowers();
         
       }, [])
-      
+        // async function getCollection() {
+        //     try {
+        //         let tempCollection = await axios.get(`http://127.0.0.1:8000/api/collection/${user.id}`, {
+        //             headers: {
+        //                 Authorization : "Bearer " + token,
+        //             },
+        //         });
+        //         setCollection(tempCollection);
+        //         let tempData = [];
+        //         for (let i = 0; i < tempCollection.data.length; i++) {
+        //             tempData.push(tempCollection.data[i].video_game.video_game_title)
+        //         }
+        //         setGameNames(tempData)
+
+        //     } catch (error) {
+        //         console.log(error.response.data);
+        //     }
+        // }
 
         // async function getRecentPosts() {
         //     try {
@@ -90,11 +103,11 @@ const ProfilePage = (props) => {
         //     }
         // }
 
-        async function deletePost(id) {
-            console.log(id)
-            let response = await axios.delete(`http://127.0.0.1:8000/api/posts/delete/${id}`);
-            getUserPosts();
-        }
+        // async function deletePost(id) {
+        //     console.log(id)
+        //     let response = await axios.delete(`http://127.0.0.1:8000/api/posts/delete/${id}`);
+        //     getUserPosts();
+        // }
 
         async function getFollowers() {
             try {
@@ -119,6 +132,7 @@ const ProfilePage = (props) => {
                 });
                 console.log(followingResponse)
                 setFollowing(followingResponse.data);
+                console.log(following)
             } catch (error) {
                 console.log(error.response.data);
             }
@@ -134,23 +148,23 @@ const ProfilePage = (props) => {
             
         }
 
-        async function getFollowingPosts() {
-            let tempPosts = [];
-            console.log(following)
-            for(let i = 0; i < following.length; i++) {
+        // async function getFollowingPosts() {
+        //     let tempPosts = [];
+        //     console.log(following)
+        //     for(let i = 0; i < following.length; i++) {
 
-                let posts = posts.filter(function(el) {
-                    console.log(el)
-                return el.user.id === following[i].follower_user.id
-                });   
+        //         let posts = posts.filter(function(el) {
+        //             console.log(el)
+        //         return el.user.id === following[i].follower_user.id
+        //         });   
 
-            tempPosts = tempPosts.concat(following);
-            console.log(tempPosts)
-            }
+        //     tempPosts = tempPosts.concat(following);
+        //     console.log(tempPosts)
+        //     }
         
-            setPosts(tempPosts);
-            console.log(posts)
-        }
+        //     setPosts(tempPosts);
+        //     console.log(posts)
+        // }
 
         // async function likeOrDislikePost(id, type, data) {
         //     try {
@@ -255,23 +269,37 @@ const ProfilePage = (props) => {
                 </div>
                 <div className='display-details'>
                     <a>{followers.length}</a>
-                    <a>Followers</a>
+                    <a onClick={() => setButtonState(3)}>Followers</a>
                 </div>
                 <div className='display-details'>
                     <a>{following.length}</a>
-                    <a>Following</a>
+                    <a onClick={() => setButtonState(4)}>Following</a>
                 </div>
                 
             </div>
             <div className='profile-buttons'>
-                <img className='profile-button' src={PostLogo} onClick={() => setButtonState(true)}/>
-                <img className='profile-button' src={CollectionLogo} onClick={() => setButtonState(false)} />
+                <img className='profile-button' src={PostLogo} onClick={() => setButtonState(1)}/>
+                <img className='profile-button' src={CollectionLogo} onClick={() => setButtonState(2)} />
             </div>
 
             <div className="container-posts">
+                {buttonState === 1 && userPosts.map((post) => ( <Post post={post} />))}
+                {buttonState === 2 && <GameTable />}
+                {buttonState === 3 && followers.map((follower) => {return(
+                    <div className='social-table'>
+                        <img className='container-post-user-image' src={`http://127.0.0.1:8000${follower.main_user.profile_picture}`} />
+                        <h2>{follower.main_user.username}</h2>
+                    </div>)})}
 
-                    {buttonState && userPosts.map((post) => ( <Post post={post} />))}
-                    {buttonState ? userPosts.map((post) => ( <Post post={post} />)) : <GameTable />}
+                {buttonState === 4 && following.map((followedUser) => {return(
+                    <div className='social-table'>
+                        <img className='container-post-user-image' src={`http://127.0.0.1:8000${followedUser.follower_user.profile_picture}`} />
+                        <h2>{followedUser.follower_user.username}</h2>
+                    </div>
+                )})}
+
+                    {/* {buttonState && userPosts.map((post) => ( <Post post={post} />))}
+                    {buttonState ? userPosts.map((post) => ( <Post post={post} />)) : <GameTable />} */}
             </div>
 
             {/* <FollowingPosts  posts={posts} likeOrDislikePost={likeOrDislikePost} setFollowing={props.setFollowing} />

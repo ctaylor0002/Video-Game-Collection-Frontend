@@ -44,7 +44,6 @@ const HomePage = (props) => {
 
   useEffect(() => {
     fetchPosts();
-    startUp()
   }, []);
 
   return (
