@@ -210,23 +210,6 @@ const ProfilePage = (props) => {
             }
         }
 
-        // function startUp() {
-        //     // console.log(token)
-        //     const observer = new IntersectionObserver((entries) => {
-        //       entries.forEach((entry) => {
-        //         // console.log(entry);
-        //         if (entry.isIntersecting) {
-        //           entry.target.classList.add("show");
-        //         } else {
-        //           entry.target.classList.remove("show");
-        //         }
-        //       });
-        //     });
-        
-        //     const hiddenElements = document.querySelectorAll(".hidden");
-        //     hiddenElements.forEach((el) => observer.observe(el));
-        //   }
-
         // async function getProfileInfo() {
         //     console.log(user)
         //     const response = await axios.get(`http://127.0.0.1:8000/api/profile/${user.id}/`)
@@ -294,34 +277,27 @@ const ProfilePage = (props) => {
                 </div>
             </header>
             <div className='profile-display'>
-                <div className='display-details'>
+                <div className='display-details' onClick={() => setButtonState(1)}>
                     <a>{userPosts.length}</a>
                     <a>Posts</a>
                 </div>
-                <div className='display-details'>
+                <div className='display-details' onClick={() => setButtonState(2)}>
                     <a>{followers.length}</a>
-                    <a onClick={() => setButtonState(3)}>Followers</a>
+                    <a>Followers</a>
                 </div>
-                <div className='display-details'>
+                <div className='display-details' onClick={() => setButtonState(3)}>
                     <a>{following.length}</a>
-                    <a onClick={() => setButtonState(4)}>Following</a>
+                    <a>Following</a>
                 </div>
-                <div className='display-details'>
+                <div className='display-details' onClick={() => setButtonState(4)}>
                     <a>{collection.length}</a>
-                    <a onClick={() => setButtonState(2)}>Collection</a>
-                    {/* <img className='profile-button' src={CollectionLogo} onClick={() => setButtonState(2)} /> */}
+                    <a>Collection</a>
                 </div>
-                
             </div>
-            {/* <div className='profile-buttons'>
-                <img className='profile-button' src={"https://cdn0.iconfinder.com/data/icons/essentials-9/128/__Letter-256.png"} onClick={() => setButtonState(1)}/>
-                <img className='profile-button' src={CollectionLogo} onClick={() => setButtonState(2)} />
-            </div> */}
 
             <div className="container-posts">
                 {buttonState === 1 && userPosts.map((post) => ( <Post post={post} />))}
-                {buttonState === 2 && <GameTable collection={collection}/>}
-                {buttonState === 3 && followers.map((follower) => {return(
+                {buttonState === 2 && followers.map((follower) => {return(
                     <div className='social-table'>
                         <table>
                             <tr>
@@ -336,7 +312,7 @@ const ProfilePage = (props) => {
                         </table>
                     </div>)})}
 
-                {buttonState === 4 && following.map((followedUser) => {return(
+                {buttonState === 3 && following.map((followedUser) => {return(
                     <div className='social-table' >
                         <table>
                             <tr>
@@ -352,57 +328,12 @@ const ProfilePage = (props) => {
                         
                     </div>
                 )})}
+                {buttonState === 4 && <GameTable collection={collection}/>}
 
-                    {/* {buttonState && userPosts.map((post) => ( <Post post={post} />))}
-                    {buttonState ? userPosts.map((post) => ( <Post post={post} />)) : <GameTable />} */}
-            </div>
-
-            {/* <FollowingPosts  posts={posts} likeOrDislikePost={likeOrDislikePost} setFollowing={props.setFollowing} />
-            <MyPosts userPosts={userPosts} deletePost={deletePost} createPost={createPost}/>
-            <UserTable followers={followers} following={following} profilePic={profilePic} profile={profile} updateProfile={updateProfile}/> */}
-
-            {/* <div className='profile-contatiner-posts'>
-                <div className='profile-contatiner-create-post'>
-                    <form>
-                        <h3>Make a Post</h3>
-                        <input type='text' placeholder='What game do you plan to talk about!'></input>
-                        <button type='submit'>Post</button>
-                    </form>
-                    <h3>My Posts</h3>
-                    <div>
-                        {myPosts &&
-                            myPosts.map((post) => {
-                                return (
-                                <div>
-                                    <div className="container-post">
-                                        {console.log(post)}
-                                        <div className="container-post-user">
-                                            <h3 key={post.id}>{post.user.username}</h3>
-                                        </div>
-                                        <div className="container-post-content">
-                                            <p key={post.id}>{post.post_content}</p>
-                                        </div>
-                                        <div className='delete-button'>
-                                            <a className='delete-button-tag' key={post.id} onClick={() => deletePost(post.id)}>Delete</a>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                )
-                                })}
-                        
-                    </div>
-                        
-                </div>
-            </div> */}
-                <div className='profile-contatiner-modify-profile'>
+            </div> 
+                {/* <div className='profile-contatiner-modify-profile'>
             
-                </div>
-
-                
-                
-
-            
+                </div> */}
        </div>
     );
 
