@@ -4,18 +4,19 @@ import './GameTable.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import useAuth from '../../hooks/useAuth';
 
-const GameTable = (props) => {
+const GameTable = (collection) => {
 
     const [searchTerm, setSearchTerm] = useState("");
     const [user, token] = useAuth();
-    const [collection, setCollection] = useState([]);
+    // const [collection, setCollection] = useState([]);
     const [openModal, setOpenModal] = useState(false);
     const [gameList, setGameList] = useState([]);
     const [gameNames, setGameNames] = useState([]);
  
     useEffect(() => {
-        getCollection();
-        getAllGames();
+        console.log(collection)
+        // getCollection();
+        // getAllGames();
     }, [])
 
     function openModalPopUp() {
@@ -63,7 +64,7 @@ const GameTable = (props) => {
                     Authorization : "Bearer " + token,
                 },
             });
-            setCollection(tempCollection);
+            // setCollection(tempCollection);
             let tempData = [];
             for (let i = 0; i < tempCollection.data.length; i++) {
                 tempData.push(tempCollection.data[i].video_game.video_game_title)
@@ -103,15 +104,15 @@ const GameTable = (props) => {
     function collectionCheck() {
         // console.log(props.collection.data)
 
-        if (collection.data == null) {
+        if (collection.collection == null) {
             console.log('Works')
             return (
                 <h2 className='collection-title'>No Collection Found</h2>
             );
-        } else if(collection.data != null) {
+        } else if(collection.collection != null) {
 
-            const returnData = collection.data &&
-                collection.data.filter((videoGame) => {
+            const returnData = collection &&
+                collection.collection.filter((videoGame) => {
                     if (searchTerm === "" ) {
                         return videoGame;
                     } else if (videoGame.video_game.video_game_title.toLowerCase().includes(searchTerm.toLowerCase())) {
@@ -129,8 +130,8 @@ const GameTable = (props) => {
                             completion = "Completed"
                     }}
                     {
-                        if (props.owner === true) {
-                            console.log(props.owner)
+                        if (collection.owner === true) {
+                            // console.log(props.owner)
                             return (
                                 <tr >
                                     <td><img src={videoGame.video_game.video_game_image}/></td>

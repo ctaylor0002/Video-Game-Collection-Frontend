@@ -23,7 +23,7 @@ const ProfilePage = (props) => {
     const [followers, setFollowers] = useState([]);
     const [following, setFollowing] = useState([]);
     const [buttonState, setButtonState] = useState(1);
-    // const [collection, setCollection] = useState([]);
+    const [collection, setCollection] = useState([]);
     // const [profilePic, setProfilePic] = useState("");
     const [profile, setProfile] = useState("");
    
@@ -31,10 +31,12 @@ const ProfilePage = (props) => {
 
         // getRecentPosts();
         // startUp();
-        getUserPosts();
+        // getUserPosts();
 
+        fetchPosts();
         getFollowers();
         getFollowing();
+        getCollection();
 
 
         // getProfileInfo();
@@ -138,17 +140,30 @@ const ProfilePage = (props) => {
             }
         }
 
-        async function getUserPosts() {
-            let tempMyPosts = await axios.get(`http://127.0.0.1:8000/api/posts/${user.id}/`);
-            tempMyPosts = tempMyPosts.data.filter(function(el) {
+        
+        const fetchPosts = async () => {
+            try {
+                let response = await axios.get(
+                    `http://127.0.0.1:8000/api/posts/${user.id}/`
+                    );
+                    setPosts(response.data);
+                    getUserPosts(response.data);
+                } catch (error) {
+                    console.log(error.response.data);
+                }
+            };
             
-                return el.user.id === user.id
-            });
-            setUserPosts(tempMyPosts);
-            
+        function getUserPosts(allPosts) {
+            // console.log(allPosts)
+            let tempUserPosts = allPosts.filter(function(post) {
+                return post.user.id === user.id
+            })
+            // console.log(tempUserPosts)
+            setUserPosts(tempUserPosts);
+                
         }
 
-        // async function getFollowingPosts() {
+            // async function getFollowingPosts() {
         //     let tempPosts = [];
         //     console.log(following)
         //     for(let i = 0; i < following.length; i++) {
@@ -249,6 +264,22 @@ const ProfilePage = (props) => {
     //     return(returnData)
 
     // }
+
+
+    async function getCollection() {
+        try {
+            let tempCollection = await axios.get(`http://127.0.0.1:8000/api/collection/${user.id}`, {
+                headers: {
+                    Authorization : "Bearer " + token,
+                },
+            });
+            console.log(tempCollection.data)
+            setCollection(tempCollection.data);
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    }
+
    
 
     return ( 
@@ -275,26 +306,50 @@ const ProfilePage = (props) => {
                     <a>{following.length}</a>
                     <a onClick={() => setButtonState(4)}>Following</a>
                 </div>
+                <div className='display-details'>
+                    <a>{collection.length}</a>
+                    <a onClick={() => setButtonState(2)}>Collection</a>
+                    {/* <img className='profile-button' src={CollectionLogo} onClick={() => setButtonState(2)} /> */}
+                </div>
                 
             </div>
-            <div className='profile-buttons'>
-                <img className='profile-button' src={PostLogo} onClick={() => setButtonState(1)}/>
+            {/* <div className='profile-buttons'>
+                <img className='profile-button' src={"https://cdn0.iconfinder.com/data/icons/essentials-9/128/__Letter-256.png"} onClick={() => setButtonState(1)}/>
                 <img className='profile-button' src={CollectionLogo} onClick={() => setButtonState(2)} />
-            </div>
+            </div> */}
 
             <div className="container-posts">
                 {buttonState === 1 && userPosts.map((post) => ( <Post post={post} />))}
-                {buttonState === 2 && <GameTable />}
+                {buttonState === 2 && <GameTable collection={collection}/>}
                 {buttonState === 3 && followers.map((follower) => {return(
                     <div className='social-table'>
-                        <img className='container-post-user-image' src={`http://127.0.0.1:8000${follower.main_user.profile_picture}`} />
-                        <h2>{follower.main_user.username}</h2>
+                        <table>
+                            <tr>
+                                <td>
+                                    <img className='container-post-user-image' src={`http://127.0.0.1:8000${follower.main_user.profile_picture}`} />
+                                </td>
+                                <td>
+                                    {follower.main_user.username}
+                                    </td>
+                            </tr>
+
+                        </table>
                     </div>)})}
 
                 {buttonState === 4 && following.map((followedUser) => {return(
-                    <div className='social-table'>
-                        <img className='container-post-user-image' src={`http://127.0.0.1:8000${followedUser.follower_user.profile_picture}`} />
-                        <h2>{followedUser.follower_user.username}</h2>
+                    <div className='social-table' >
+                        <table>
+                            <tr>
+                                <td>
+                                    <img className='container-post-user-image' src={`http://127.0.0.1:8000${followedUser.follower_user.profile_picture}`} />
+                                </td>
+                                <td>
+                                    {followedUser.follower_user.username}
+                                </td>
+                            </tr>
+                        </table>
+                        
+                        
                     </div>
                 )})}
 
