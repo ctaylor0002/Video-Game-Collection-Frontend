@@ -23,7 +23,9 @@ html {
 }
 
 p {
-  font-size: 20px;
+  /* font-size: 20px; */
+  margin-bottom: 0;
+  padding: 0px 10px;
 }
 
 button {

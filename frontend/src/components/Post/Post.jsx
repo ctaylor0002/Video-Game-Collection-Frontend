@@ -119,7 +119,7 @@ const Post = (post) => {
                     </div>
                     
                     <h3 id='user-tag' className='username' key={post.id}>@{currentpost.user.username}</h3>
-                    <p>{getPostTime(currentpost.created_at)}</p>
+                    <p className='post-date'>{getPostTime(currentpost.created_at)}</p>
                 </div>
               </div>
               <div className="container-post-content">

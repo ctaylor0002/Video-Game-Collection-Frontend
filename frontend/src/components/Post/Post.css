@@ -61,11 +61,12 @@
 .container-post-user-details {
     display: flex;
     flex-direction: row;
-    /* align-items: center; */
+    align-items: center;
 }
 
 .username {
     font-size: 16px;
+    margin-bottom: 0;
 }
 
 #user-tag {
@@ -102,6 +103,10 @@
     background-color: #fff;
     padding: 10px;
     border: 1px solid #ccc;
+}
+
+.post-date {
+    margin-bottom: 0;
 }
 
 @media screen and (min-width: 768px){
