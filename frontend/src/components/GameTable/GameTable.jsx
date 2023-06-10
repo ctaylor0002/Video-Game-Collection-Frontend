@@ -8,15 +8,12 @@ const GameTable = (collection) => {
 
     const [searchTerm, setSearchTerm] = useState("");
     const [user, token] = useAuth();
-    // const [collection, setCollection] = useState([]);
     const [openModal, setOpenModal] = useState(false);
     const [gameList, setGameList] = useState([]);
     const [gameNames, setGameNames] = useState([]);
  
     useEffect(() => {
-        console.log(collection)
-        // getCollection();
-        // getAllGames();
+
     }, [])
 
     function openModalPopUp() {
@@ -27,19 +24,19 @@ const GameTable = (collection) => {
         }
     }
 
-    async function getAllGames() {
-        try {
-            let videoGamesResponse = await axios.get('http://127.0.0.1:8000/api/video_game/get/', {
-                headers: {
-                    Authorization : "Bearer " + token,
-                },
-            });
-            console.log(videoGamesResponse.data);
-            setGameList(videoGamesResponse.data);
-        } catch (error) {
-            console.log(error.response.data);
-        }
-    }
+    // async function getAllGames() {
+    //     try {
+    //         let videoGamesResponse = await axios.get('http://127.0.0.1:8000/api/video_game/get/', {
+    //             headers: {
+    //                 Authorization : "Bearer " + token,
+    //             },
+    //         });
+    //         console.log(videoGamesResponse.data);
+    //         setGameList(videoGamesResponse.data);
+    //     } catch (error) {
+    //         console.log(error.response.data);
+    //     }
+    // }
 
     async function addGame(data) {
         try {
@@ -157,8 +154,8 @@ const GameTable = (collection) => {
                 })
                 return (
                     <div>
+                        <h2 className='container-header'>Video Game Collection</h2>
                         <div className='game-table-header'>
-                            <h2 className='container-header'>Video Game Collection</h2>
                             <input type="text" placeholder="Search Collection" className='game-table-search-bar' onChange={(event) => setSearchTerm(event.target.value)}/>
                         </div>
                         <div className='modal-table'>
