@@ -127,7 +127,7 @@ const Post = (post) => {
                 
               </div>
               <div className="container-post-likes-dislikes">
-                <div className="container-post-likes-count">
+                <div className="container-post-likes-dislikes-count">
                   <LikeButton
                     className={"jump-shake"}
                     id={currentpost.id}
@@ -136,7 +136,7 @@ const Post = (post) => {
                   />
                   <p className="like-or-dislike-count" key={currentpost.id}>{likeCount}</p>
                 </div>
-                <div className="container-post-dislikes-count">
+                <div className="container-post-likes-dislikes-count">
                   <DislikeButton
                     className={"jump-shake"}
                     id={currentpost.id}

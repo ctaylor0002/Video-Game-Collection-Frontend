@@ -122,31 +122,32 @@ const ProfilePage = (props) => {
 
     return ( 
         <div className='profile-container'>
-            <header id='profile'>
-                <div>
-                    <img src={`http://127.0.0.1:8000/images/${userObject.profile_picture}`} className='profile-picture' />
-                </div>
+
+            <div id='profile-header'>
                 <div className='profile-details-container'>
-                    <h2 className='user-name'>{userObject.username}</h2>
-                    <a>Edit Profile</a>
+                    <img src={`http://127.0.0.1:8000/images/${userObject.profile_picture}`} className='profile-picture' />
+                    <div className='profile-details'>
+                        <h2 className='user-name'>{userObject.username}</h2>
+                        <a>Edit Profile</a>
+                    </div>
                 </div>
-            </header>
-            <div className='profile-display'>
-                <div className='display-details' onClick={() => setButtonState(1)}>
-                    <a>{userPosts.length}</a>
-                    <a>Posts</a>
-                </div>
-                <div className='display-details' onClick={() => setButtonState(2)}>
-                    <a>{followers.length}</a>
-                    <a>Followers</a>
-                </div>
-                <div className='display-details' onClick={() => setButtonState(3)}>
-                    <a>{following.length}</a>
-                    <a>Following</a>
-                </div>
-                <div className='display-details' onClick={() => setButtonState(4)}>
-                    <a>{collection.length}</a>
-                    <a>Collection</a>
+                <div className='profile-display'>
+                    <div className='display-details' onClick={() => setButtonState(1)}>
+                        <a>{userPosts.length}</a>
+                        <a>Posts</a>
+                    </div>
+                    <div className='display-details' onClick={() => setButtonState(2)}>
+                        <a>{followers.length}</a>
+                        <a>Followers</a>
+                    </div>
+                    <div className='display-details' onClick={() => setButtonState(3)}>
+                        <a>{following.length}</a>
+                        <a>Following</a>
+                    </div>
+                    <div className='display-details' onClick={() => setButtonState(4)}>
+                        <a>{collection.length}</a>
+                        <a>Collection</a>
+                    </div>
                 </div>
             </div>
 
