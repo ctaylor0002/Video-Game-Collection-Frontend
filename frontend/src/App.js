@@ -132,7 +132,7 @@ function App() {
               }
             />
             <Route
-              path="/profile"
+              path="/:username"
               element={
                 <ProfilePage
                   followers={followers}
@@ -146,7 +146,7 @@ function App() {
             <Route
               path="/:username"
               element={
-                <UserPage following={following} setFollowing={setFollowing} />
+                <ProfilePage /> //following={following} setFollowing={setFollowing} 
               }
             />
           </Routes>

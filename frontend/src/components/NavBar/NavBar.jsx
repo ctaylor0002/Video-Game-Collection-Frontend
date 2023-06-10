@@ -3,7 +3,12 @@ import Logo from "../../assets/Logo.png";
 import "./NavBar.css";
 import { Link } from "react-router-dom";
 
+import useAuth from "../../hooks/useAuth";
+
 const NavBar = () => {
+
+  const [user, token] = useAuth();
+
   return (
     <nav className="nav-bar-container">
       <div id="nav-website-name">
@@ -24,7 +29,7 @@ const NavBar = () => {
           <Link to="/home">
             <li className="nav-link-anchor">Home</li>
           </Link>
-          <Link to="/profile">
+          <Link to={`/${user.username}/`}>
             <li>Profile</li>
           </Link>
           <Link to="/collection">
