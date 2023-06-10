@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/Video-Game-Collection-Frontend/static/css/main.7ef506fc.css",
+    "main.js": "/Video-Game-Collection-Frontend/static/js/main.6305de5e.js",
+    "static/media/Logo.png": "/Video-Game-Collection-Frontend/static/media/Logo.f1f9713e6fa2d50e784b.png",
+    "static/media/Thumbs-Down-Selected.png": "/Video-Game-Collection-Frontend/static/media/Thumbs-Down-Selected.0911bf0c495270f15b4a.png",
+    "static/media/Thumbs-Up-Selected.png": "/Video-Game-Collection-Frontend/static/media/Thumbs-Up-Selected.3364fe9affa1039ef134.png",
+    "index.html": "/Video-Game-Collection-Frontend/index.html",
+    "main.7ef506fc.css.map": "/Video-Game-Collection-Frontend/static/css/main.7ef506fc.css.map",
+    "main.6305de5e.js.map": "/Video-Game-Collection-Frontend/static/js/main.6305de5e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7ef506fc.css",
+    "static/js/main.6305de5e.js"
+  ]
+}
