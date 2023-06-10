@@ -38,6 +38,7 @@
 
 .social-table {
     display: flex;
+    padding-left: 50px;
 }
 
 /* .user-name {
