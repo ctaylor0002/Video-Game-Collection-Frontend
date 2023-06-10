@@ -11,15 +11,29 @@
 }
 
 .profile-details-container {
-    margin-left: 10px;
-    /* flex-direction: row; */
-}
-
-.profile-header {
+    margin-bottom: 25px;
     display: flex;
     flex-direction: row;
+    padding-left: 25px;
 }
 
+.profile-details {
+    display: flex;
+    flex-direction: column;
+    padding-left: 25px;
+}
+
+#profile-header {
+    display: flex;
+    flex-direction: column;
+    transition: all 1s;
+    /* align-items: center; */
+}
+
+/* .profile-header {
+    display: flex;
+    flex-direction: row;
+} */
 
 .profile-picture {
     border-radius: 50%;
@@ -31,7 +45,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* padding-left: 10px; */
     padding-top: 10px;
 
 }
@@ -40,10 +53,6 @@
     display: flex;
     padding-left: 50px;
 }
-
-/* .user-name {
-    font-size: 14px;
-} */
 
 .container-posts {
     margin-top: 10px;
@@ -78,45 +87,25 @@
 
 
 
+/* @media screen and (min-width: 768px){
+    #profile-header {
+        width: 50%;
+    }
+
+    .profile-details-container {
+        justify-content: space-evenly;
+    }
+
+    .profile-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+  }
+   */
 
 
 
 
 
 
-
-body {
-    background-color: rgb(160, 160, 160);
-    /* margin-top: 80px; */
-    margin-bottom: 80px;
-
-}
-
-.test {
-    color: black;
-}
-
-
-.container {
-    padding-top: 100px;
-    padding-bottom: 80px;
-}
-
-.container-post-dislikes-count {
-    display: flex;
-}
-
-.followers-posts-header {
-    display: flex;
-    justify-content: center;
-}
-
-.follower-posts {
-    margin-left: 50px;
-    margin-right: 50px;
-}
-
-.profile-container-followers-followed {
-    margin-left: 50px;
-    margin-right: 50px;
-}
