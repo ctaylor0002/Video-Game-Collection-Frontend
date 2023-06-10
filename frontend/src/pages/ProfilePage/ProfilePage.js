@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import useAuth from '../../hooks/useAuth';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import '../ProfilePage/ProfilePage.css'
 
@@ -8,7 +9,9 @@ import GameTable from '../../components/GameTable/GameTable';
 import Post from '../../components/Post/Post';
 
 const ProfilePage = (props) => {
-   
+    const location = useLocation();
+    const userObject = location.state?.userDetails;
+
     const [user, token] = useAuth();
     const [userPosts, setUserPosts] = useState([]);
     const [followers, setFollowers] = useState([]);
@@ -17,6 +20,8 @@ const ProfilePage = (props) => {
     const [collection, setCollection] = useState([]);
 
     useEffect(() => {
+        console.log(location.state.userDetails)
+        // console.log(userObject)
         fetchPosts();
         getFollowers();
         getFollowing();
@@ -26,7 +31,7 @@ const ProfilePage = (props) => {
       
       async function getFollowers() {
           try {
-              let followersResponse = await axios.get('http://127.0.0.1:8000/api/followers/list/', {
+              let followersResponse = await axios.get(`http://127.0.0.1:8000/api/followers/list/${userObject.id}`, {
                   headers: {
                       Authorization : "Bearer " + token,
                     },
@@ -40,7 +45,7 @@ const ProfilePage = (props) => {
         
         async function getFollowing() {
             try {
-                let followingResponse = await axios.get(`http://127.0.0.1:8000/api/followers/`, {
+                let followingResponse = await axios.get(`http://127.0.0.1:8000/api/followers/${userObject.id}`, {
                     headers: {
                         Authorization : "Bearer " + token,
                     },
@@ -57,7 +62,7 @@ const ProfilePage = (props) => {
         const fetchPosts = async () => {
             try {
                 let response = await axios.get(
-                    `http://127.0.0.1:8000/api/posts/${user.id}/`
+                    `http://127.0.0.1:8000/api/posts/${userObject.id}/`
                     );
                     // setUserPosts(response.data);
                     getUserPosts(response.data);
@@ -69,7 +74,7 @@ const ProfilePage = (props) => {
             function getUserPosts(allPosts) {
                 // console.log(allPosts)
                 let tempUserPosts = allPosts.filter(function(post) {
-                    return post.user.id === user.id
+                    return post.user.id === userObject.id
                 })
                 // console.log(tempUserPosts)
                 setUserPosts(tempUserPosts);
@@ -78,7 +83,7 @@ const ProfilePage = (props) => {
             
             async function getCollection() {
                 try {
-                    let tempCollection = await axios.get(`http://127.0.0.1:8000/api/collection/${user.id}`, {
+                    let tempCollection = await axios.get(`http://127.0.0.1:8000/api/collection/${userObject.id}`, {
                         headers: {
                             Authorization : "Bearer " + token,
                         },
@@ -119,10 +124,10 @@ const ProfilePage = (props) => {
         <div className='profile-container'>
             <header id='profile'>
                 <div>
-                    <img src={`http://127.0.0.1:8000/images/${user.profile_picture}`} className='profile-picture' />
+                    <img src={`http://127.0.0.1:8000/images/${userObject.profile_picture}`} className='profile-picture' />
                 </div>
                 <div className='profile-details-container'>
-                    <h2 className='user-name'>{user.username}</h2>
+                    <h2 className='user-name'>{userObject.username}</h2>
                     <a>Edit Profile</a>
                 </div>
             </header>

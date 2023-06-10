@@ -108,17 +108,17 @@ const Post = (post) => {
         <div className="hidden container-post" key={currentpost.id}>
               <div className="container-post-user">
                 <div className='hover-container' > 
-                    <Link to={`/${currentpost.user.username}/`}><img className='container-post-user-image' src={`http://127.0.0.1:8000${currentpost.user.profile_picture}/`} /></Link>
+                <Link to={`/${currentpost.user.username}/`} state= {{userDetails : currentpost.user}} ><img className='container-post-user-image' src={`http://127.0.0.1:8000${currentpost.user.profile_picture}/`} /></Link>
                 </div>
                 <div className='container-post-user-details'>
                     <div className='hover-container' onMouseOver={handleMouseOver} onMouseLeave={handleMouseOut}>
-                        <Link to={`/${currentpost.user.username}/`}><h3 id='username-tag'className='username' key={post.id}>{currentpost.user.display_name}</h3></Link>
+                        <Link to={`/${currentpost.user.username}/`} state= {{userDetails : currentpost.user}} ><h3 id='username-tag'className='username' key={post.id}>{currentpost.user.display_name}</h3></Link>
                         {hoverableProfile && (
                             <ProfileHoverable post={currentpost}/>
                         )}
                     </div>
                     
-                    <h3 id='user-tag' className='username' key={post.id}>@{currentpost.user.username}</h3>
+                    <h3 id='user-tag' className='username' key={post.id} onClick={() =>console.log(currentpost.user)}>@{currentpost.user.username}</h3>
                     <p className='post-date'>{getPostTime(currentpost.created_at)}</p>
                 </div>
               </div>

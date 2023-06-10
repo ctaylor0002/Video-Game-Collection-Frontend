@@ -29,7 +29,7 @@ const NavBar = () => {
           <Link to="/home">
             <li className="nav-link-anchor">Home</li>
           </Link>
-          <Link to={`/${user.username}/`}>
+          <Link to={`/${user.username}/`} state= {{userDetails: user}}>
             <li>Profile</li>
           </Link>
           <Link to="/collection">

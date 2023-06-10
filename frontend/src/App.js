@@ -135,10 +135,11 @@ function App() {
               path="/:username"
               element={
                 <ProfilePage
-                  followers={followers}
-                  following={following}
-                  followingPosts={followingPosts}
-                  myPosts={myPosts}
+                  user = {user}
+                  // followers={followers}
+                  // following={following}
+                  // followingPosts={followingPosts}
+                  // myPosts={myPosts}
                 />
               }
             />
