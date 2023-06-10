@@ -1,0 +1,74 @@
+
+
+.nav-link-anchor {
+  transition: 1s;
+  font-size: 16px;
+  /* text-decoration: none; */
+  color: white;
+}
+
+.navigation-bar-logo-image {
+  width: 40px;
+}
+
+.like-or-dislike-count {
+  margin-bottom: 0;
+}
+
+#nav-website-name {
+  padding: 25px 0px;
+  display: flex;
+  justify-content: center;
+}
+#website-header {
+  color: white;
+}
+
+.links {
+  text-decoration: none;
+  color: white;
+}
+
+.nav-bar-container {
+    background: rgb(44, 44, 44);
+    box-shadow: 4px 2px 5px gray;
+    height: 150px;
+}
+
+nav > div {
+  flex: 1;
+}
+
+#nav-links-container {
+  align-items: center;
+}
+
+#nav-links {
+  display: flex;
+  justify-content: space-around;
+  list-style-type: none;
+}
+
+@media screen and (min-width: 768px){
+  .nav-bar-container {
+      height: min-content;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: left;
+      padding: 10px;
+  }
+
+  #nav-website-name {
+    display: flex;
+    justify-content: left;
+    padding: 10px 20px;
+  }
+
+  /* Add a transition of 1 second back after not hovering */
+  li:hover {
+    /* font-size: 18px; */
+    color: red;
+  }
+}
+

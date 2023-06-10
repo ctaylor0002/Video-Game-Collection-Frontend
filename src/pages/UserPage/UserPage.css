@@ -1,0 +1,31 @@
+.page {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.image-description {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-pic img {
+    width: 200px;
+    margin: 50px 0px;
+}
+
+.collection {
+    width: 66%;
+}
+
+.image-description h2 {
+    color: black;
+    font-size: 36px;
+}
+
+.desc {
+    display: flex;
+    width: 250px;
+}
+

@@ -1,0 +1,15 @@
+.game-table-header {
+    display: flex;
+    justify-content: flex-end;
+    /* align-items: baseline; */
+}
+
+.game-table-search-bar {
+    width: 300px;
+
+}
+
+table img {
+    width: 100px;
+}
+

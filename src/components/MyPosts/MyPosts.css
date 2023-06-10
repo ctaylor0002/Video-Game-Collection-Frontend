@@ -1,0 +1,43 @@
+.delete-button-tag {
+    font-size: 24px;
+    color: red;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.delete-button-tag:hover {
+    background-color: transparent;
+}
+
+.container-post-user {
+    display: flex;
+    /* align-items: center;
+    justify-content: space-between; */
+}
+
+.container-post-like-dislike {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.post-input-box {
+    width: 100%;
+    resize: none;
+    padding: 2px;
+}
+
+.profile-container-create-post-form {
+    border: 3px;
+    border-style: solid;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.profile-container-create-post-form-header {
+    display: flex;
+    justify-content: center;
+}
+
+

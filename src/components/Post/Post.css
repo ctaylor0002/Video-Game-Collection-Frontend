@@ -1,0 +1,129 @@
+.container-post {
+    border: solid rgba(0,0,0,.1);
+    border-width: 1px 1px .5px;
+    width: 100%;
+    padding: 25px;
+    /* margin-bottom: -2px; */
+}
+
+.post-content {
+    margin-left: 0;
+    font-size: 16px;
+}
+
+.container-post-user {
+    display: flex;
+    align-items: center;
+
+}
+
+.container-post-user-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.container-post-content {
+    display: flex;
+    margin-top: 10px;
+    flex-wrap: wrap;
+
+}
+
+.container-post-likes-dislikes {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.container-post-likes-count {
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.hidden {
+
+    filter: blur(2px);
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: all 1s;
+}
+
+.show {
+    filter: blur(0);
+    transform: translateX(0);
+
+    opacity: 1;
+}
+
+.container-post-user-details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.username {
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+#user-tag {
+    margin-left: 20px;
+    opacity: 50%;
+}
+
+#username-tag {
+    text-decoration: none;
+    color: black;
+}
+
+#username-tag:hover {
+    text-decoration: underline;
+    text-underline-offset: 2px; 
+}
+
+.hover-container {
+    position: relative;
+}
+
+.hover-container:hover .profile-hoverable {
+    display: block;
+    width: 200px;
+    height: 200px;
+    z-index: 1;
+}
+
+.hover-component {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.post-date {
+    margin-bottom: 0;
+}
+
+@media screen and (min-width: 768px){
+    .container-posts {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container-post {
+        width: 50%; 
+
+    }
+
+    .container-post:hover {
+        background-color: rgb(251, 251, 251);
+
+    }
+  }
+
