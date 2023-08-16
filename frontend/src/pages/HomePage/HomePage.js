@@ -13,7 +13,7 @@ import Post from "../../components/Post/Post";
 // import { postDataState, fetchPosts } from "../../recoilState.js";
 
 import useCustomForm from "../../hooks/useCustomForm";
-import { startUp } from '../../animationScript.js'
+// import { startUp } from '../../animationScript.js'
 
 
 
@@ -42,6 +42,14 @@ const HomePage = (props) => {
     }
   };
 
+  const loginLogout = () => {
+    if(user) {
+      handleSubmit();
+    } else {
+      window.location.href = "http://localhost:3000/login"
+    }
+  }
+
   useEffect(() => {
     fetchPosts();
   }, []);
@@ -49,15 +57,23 @@ const HomePage = (props) => {
   return (
     <div className="page-body-container">
       <div className="login-logout">
-        <button onClick={handleSubmit}>{user ? "Logout" : "Login"}</button>
+        <button onClick={loginLogout}>{user ? "Logout" : "Login"}</button>
       </div>
-      <div id="user-information">
-        <img
-          src={`http://127.0.0.1:8000/images/${user.profile_picture}`}
-          className="user-profile-picture"
-        />
+      <div id="user-information">{user ? 
+        <div className="user-information-logged-in">
+          <img
+              src={`http://127.0.0.1:8000/images/${user.profile_picture}/`}
+              className="user-profile-picture"
+            />
+            
+            <h2 id="user-username">Welcome, {user.display_name}</h2>
+        </div> 
+        :
+        <div>
+          {/* Temporary empty div */}
+        </div>
+      }
         
-        <h2 id="user-username">Welcome, {user.display_name}</h2>
       </div>
 
       <div className="container-posts">
