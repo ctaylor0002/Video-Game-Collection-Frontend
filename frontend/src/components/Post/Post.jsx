@@ -50,6 +50,7 @@ const Post = (post) => {
   const [hoverableProfile, setHoverableProfile] = useState(false);
 
   useEffect(() => {
+    console.log(currentpost.user.profile_picture)
     startUp();
   }, [])
 
@@ -104,11 +105,12 @@ const Post = (post) => {
 
 
 
+
     return ( 
         <div className="hidden container-post" key={currentpost.id}>
               <div className="container-post-user">
                 <div className='hover-container' > 
-                <Link to={`/${currentpost.user.username}/`} state= {{userDetails : currentpost.user}} ><img className='container-post-user-image' src={`http://127.0.0.1:8000${currentpost.user.profile_picture}/`} /></Link>
+                <Link to={`/${currentpost.user.username}/`} state= {{userDetails : currentpost.user}} ><img className='container-post-user-image' src={`http://127.0.0.1:8000${currentpost.user.profile_picture}`} /></Link>
                 </div>
                 <div className='container-post-user-details'>
                     <div className='hover-container' onMouseOver={handleMouseOver} onMouseLeave={handleMouseOut}>
