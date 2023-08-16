@@ -27,7 +27,6 @@
     display: flex;
     flex-direction: column;
     transition: all 1s;
-}
 
 .profile-picture {
     border-radius: 50%;
@@ -78,8 +77,20 @@
 
 
 
+/* @media screen and (min-width: 768px){
+    #profile-header {
+        width: 50%;
+    }
 
+    .profile-details-container {
+        justify-content: space-evenly;
+    }
 
-
-
+    .profile-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+  }
+   */
 
